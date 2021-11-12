@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+    <div class = "item">
+        <div class="container-block">
+            <h1>Departments <span id='date'></span></h1>
+            <div class="main">                                
+                <div class = "department1 item">
+                    <a>งานถอนขนไก่</a>
+                    <button href = >details</button>
+                </div>
+
+                <div class = "department2 item">
+                    <a>งานเชือดไก่</a>
+                    <button href = >details</button>
+                </div>
+
+
+                <div class = "department3 item">
+                    <a>งานไก่ตกราว</a>
+                    <button href = >details</button>
+                </div>
+
+
+                <div class = "department4 item">
+                    <a>งานจัดเก็บและจ่ายสินค้าแช่แข็ง</a>
+                    <button href = >details</button>
+                </div>
+            </div>
+        <div>
+    <script>
+        var dt = new Date();
+        year = dt.getFullYear();
+        month = dt.getMonth() + 1;
+        day = dt.getDate();
+        document.getElementById('date').innerHTML=day + "/" + month + "/" + year;
+    </script>
+    </div>
+</body>
+</html>

@@ -13,3 +13,61 @@
  *= require_tree .
  *= require_self
  */
+ .header {
+    text-decoration: none;
+    font-weight: solid;
+    font-size: 30pt;    
+}
+
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    margin: 8px;
+    background-color: #9fc4c2;
+}
+
+.item{
+    padding: 8px;
+    background-color: white;
+    border: 4px solid rgb(255, 175, 71);
+    border-radius: 6px;
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.25);
+}
+
+.department1, .department2, .department3, .department4{
+    background-color: #9fc4c2;
+    font-size: xx-large;
+}
+
+.container-block h1{
+    text-align: center;
+}
+
+.container-block .main {
+    display: grid;
+    grid-column: 4 / 10;
+}
+
+.container-block .main .department1 {
+    grid-column: 1 / span 3;
+    grid-row: 1 /  3 ;
+}
+
+.container-block .main .department2 {
+    grid-column: 5 / span 5;
+    grid-row: 1 /  3 ;
+}
+
+.container-block .main .department3 {
+    grid-column:  5 / span 5;
+    grid-row: 4 /  6 ;
+}
+
+.container-block .main .department4 {
+    grid-column: 1 / span 3;
+    grid-row: 4 /  6 ;
+}
+
+.department1 button, .department2 button, .department3 button, .department4 button{
+    float: right;  
+    height: 100%;
+}
