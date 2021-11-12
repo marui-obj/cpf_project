@@ -10,11 +10,6 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_12_152725) do
-
-  create_table "employees", force: :cascade do |t|
-    t.string "name"
-    t.string "uid"
 ActiveRecord::Schema.define(version: 2021_11_12_153841) do
 
   create_table "departments", force: :cascade do |t|
@@ -26,11 +21,25 @@ ActiveRecord::Schema.define(version: 2021_11_12_153841) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "employees", force: :cascade do |t|
+    t.string "name"
+    t.string "uid"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "managers", force: :cascade do |t|
     t.string "name"
     t.string "uid"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "shifts", force: :cascade do |t|
+    t.integer "department_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["department_id"], name: "index_shifts_on_department_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -39,13 +48,6 @@ ActiveRecord::Schema.define(version: 2021_11_12_153841) do
     t.string "password_digest"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-  end
-  
-  create_table "shifts", force: :cascade do |t|
-    t.integer "department_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["department_id"], name: "index_shifts_on_department_id"
   end
 
 end
