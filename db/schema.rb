@@ -14,14 +14,9 @@ ActiveRecord::Schema.define(version: 2021_11_12_153841) do
 
   create_table "departments", force: :cascade do |t|
     t.string "title"
-    t.datetime "check_in"
-    t.datetime "check_out"
-    t.datetime "overtime"
     t.integer "manager_id"
-    t.integer "employee_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["employee_id"], name: "index_departments_on_employee_id"
     t.index ["manager_id"], name: "index_departments_on_manager_id"
   end
 
@@ -42,6 +37,9 @@ ActiveRecord::Schema.define(version: 2021_11_12_153841) do
   end
 
   create_table "shifts", force: :cascade do |t|
+    t.datetime "check_in"
+    t.datetime "check_out"
+    t.datetime "overtime"
     t.integer "department_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
