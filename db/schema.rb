@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_12_153841) do
+ActiveRecord::Schema.define(version: 2021_11_13_171942) do
 
   create_table "departments", force: :cascade do |t|
     t.string "title"
@@ -29,6 +29,13 @@ ActiveRecord::Schema.define(version: 2021_11_12_153841) do
     t.index ["department_id"], name: "index_employees_on_department_id"
   end
 
+  create_table "employees_shifts", id: false, force: :cascade do |t|
+    t.integer "employee_id", null: false
+    t.integer "shift_id", null: false
+    t.index ["employee_id", "shift_id"], name: "index_employees_shifts_on_employee_id_and_shift_id"
+    t.index ["shift_id", "employee_id"], name: "index_employees_shifts_on_shift_id_and_employee_id"
+  end
+
   create_table "managers", force: :cascade do |t|
     t.string "name"
     t.string "uid"
@@ -39,7 +46,7 @@ ActiveRecord::Schema.define(version: 2021_11_12_153841) do
   create_table "shifts", force: :cascade do |t|
     t.datetime "check_in"
     t.datetime "check_out"
-    t.datetime "overtime"
+    t.integer "overtime"
     t.integer "department_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

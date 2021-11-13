@@ -1,3 +1,3 @@
-class Manager < ApplicationRecord
+class Manager < ActiveRecord::Base
     has_many :departments
 end
