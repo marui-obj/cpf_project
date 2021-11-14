@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <%= javascript_pack_tag 'date'%>
+</head>
+<body>
+    <div class = "item">
+        <div class ="container-block">
+            <h1>Departments <span id='date'></span></h1>
+            <div class="main">                                
+                <div class = "department">
+                    <a>งานถอนขนไก่</a>
+                    <p>asdadsd<br>
+                    asdadsd<br>
+                    assassa</p>
+                    <%= link_to '<button>details</button>'.html_safe,  department_path(1)%>
+                </div>
+                <div class="space"></div>
+                <div class = "department">
+                    <a>งานเชือดไก่</a>
+                    <p>asdadsd<br>
+                    asdadsd<br>
+                    assassa</p>
+                    <%= link_to '<button>details</button>'.html_safe,  department_path(2)%>
+                </div>
+                <div class = "department">
+                    <a>งานไก่ตกราว</a>
+                    <p>asdadsd<br>
+                    asdadsd<br>
+                    assassa</p>
+                    <%= link_to '<button>details</button>'.html_safe,  department_path(3)%>
+                </div>
+                <div class="space"></div>
+                <div class = "department">
+                    <a>งานจัดเก็บและจ่ายสินค้าแช่แข็ง</a>
+                    <p>asdadsd<br>
+                    asdadsd<br>
+                    assassa</p>
+                    <%= link_to '<button>details</button>'.html_safe,  department_path(4)%>
+                </div>
+            </div>
+        <div>
+    </div>
+</body>
+</html>

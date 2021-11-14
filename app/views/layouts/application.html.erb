@@ -12,7 +12,7 @@
 
   <body>
     <div class = "header">
-      <a href = departments>Home</a>
+      <%= link_to 'Home'.html_safe,  departments_path%>
     </div>
     <%= yield %>
   </body>

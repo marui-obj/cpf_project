@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <script src="../../javascript/packs/select.js"></script>
+    <%= javascript_pack_tag 'date' %>
+    <%= javascript_pack_tag 'select' %>
 </head>
 <body>
-    <h3> Header</h3>
     <div class="top">
-        <a>Date</a>
+        <a id="date"></a>
         <button class="remove-shift">Remove Shift</button>
         <button class="add-shift">Add Shift</button>
     </div>
