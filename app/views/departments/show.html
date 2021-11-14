@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<style>
+    body{
+        background-color: rgb(211, 223, 255);
+    }
+    .top{
+        margin-top: 20px;
+        font-size: 2em;
+    }
+    .top button{
+        padding: 6px;
+        float: right;
+        margin-top: 8px;
+        margin-right: 10px;
+    }
+    .top .add-shift:hover{
+        transform: scale(1.15, 1.15);
+        background-color: #56e686;
+        border: 2px solid #467fb9;
+    }
+    .top .remove-shift:hover{
+        transform: scale(1.15, 1.15);
+        background-color: #e65656;
+        border: 2px solid #467fb9;
+    }
+    table, td, th {
+        border: 2px solid rgb(255, 175, 71);
+    }
+    table{
+        margin-top: 20px;
+        width: 100%;
+        border-collapse: collapse;
+        text-align: center;
+        font-size: 18px;
+        background-color: #eefdfc;
+    }
+</style>
+<body>
+    <h3> Header</h3>
+    <div class="top">
+        <a>Date</a>
+        <button class="remove-shift">Remove Shift</button>
+        <button class="add-shift">Add Shift</button>
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th><input type="checkbox" id="select-all">Select All</th>
+                <th>Entry Time</th>
+                <th>Exit Time</th>
+                <th>Shift hours</th>
+                <th>Number of Employees</th>
+                <th>Manage</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><input type="checkbox"></td>
+                <td>9.00</td>
+                <td>16.00</td>
+                <td>7</td>
+                <td>40</td>
+                <td>More info</td>
+            </tr>
+        </tbody>
+    </table>
+    <script>
+        document.getElementById('select-all').onclick = function() {
+            var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            for (var checkbox of checkboxes) {
+                checkbox.checked = this.checked;
+            }
+        }
+    </script>
+</body>
+</html>

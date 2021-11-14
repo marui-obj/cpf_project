@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<style>
+    body{
+        background-color: rgb(211, 223, 255);
+    }
+    .top{
+        margin-top: 20px;
+        font-size: 2em;
+    }
+    .top button{
+        padding: 6px 10px 6px 10px;
+        float: right;
+        margin-top: 8px;
+        margin-right: 10px;
+    }
+    .top .plan:hover{
+        transform: scale(1.15, 1.15);
+        background-color: #56e686;
+        border: 2px solid #467fb9;
+    }
+    .top .actual:hover{
+        transform: scale(1.15, 1.15);
+        background-color: #e65656;
+        border: 2px solid #467fb9;
+    }
+    .container{
+        margin-top: 20px;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+    .container table, .container td, .container th {
+        border: 2px solid rgb(255, 175, 71);
+    }
+    .container table{
+        flex-basis: 70%;
+        border-collapse: collapse;
+        text-align: center;
+        font-size: 18px;
+        background-color: #eefdfc;
+    }
+    .content-right{
+        align-content: flex-end;
+        display: flex;
+        flex-direction: column;
+    }
+    .OT{
+        margin-top: 20px;
+    }
+    .OT a{
+        font-size: 2em;
+    }
+    .OT .manageOT{
+        border: 2px solid rgb(255, 175, 71);
+        background-color: #eefdfc;
+    }
+    .OT .manageOT input{
+        margin: 10px;
+        width: 90%;
+    }
+    .OT .manageOT button{
+        margin: 0 0 10px 10px;
+        width: 44%;
+    }
+</style>
+<body>
+    <h3> Header</h3>
+    <div class="top">
+        <a>Date</a>
+        <button class="actual">Actual</button>
+        <button class="plan">Plan</button>
+    </div>
+    <div class="container">
+        <table>
+            <thead>
+                <tr>
+                    <th><input type="checkbox" id="select-all">Select All</th>
+                    <th>Entry Time</th>
+                    <th>Exit Time</th>
+                    <th>Shift hours</th>
+                    <th>Number of Employees</th>
+                    <th>Manage</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><input type="checkbox"></td>
+                    <td>9.00</td>
+                    <td>16.00</td>
+                    <td>7</td>
+                    <td>40</td>
+                    <td>More info</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="content-right">
+            <div class="add-worker">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Status</th>
+                            <th>Work Time</th>
+                            <th>Add</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>SomeOne Likeme</td>
+                            <td>Free</td>
+                            <td>0</td>
+                            <td><button>Assign</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="OT">
+                <a>OT</a>
+                <div class="manageOT">
+                    <input type="text" placeholder="Hour" value="">
+                    <br>
+                    <button>Increase</button>
+                    <button>Decrease</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        document.getElementById('select-all').onclick = function() {
+            var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            for (var checkbox of checkboxes) {
+                checkbox.checked = this.checked;
+            }
+        }
+    </script>
+</body>
+</html>
