@@ -4,7 +4,9 @@ Rails.application.routes.draw do
   root :to => redirect('/login')
   
   resources :users, only: [:new, :create, :edit, :update, :show, :destroy]
-  resources :departments
+  resources :departments do
+    resources :shifts
+  end
 
   get '/login', to: 'sessions#login'
   post '/login', to: 'sessions#create'

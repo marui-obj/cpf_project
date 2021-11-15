@@ -26,11 +26,11 @@
                     <% @department.shifts.each do |shift| %>
                         <tr>
                             <td><input type="checkbox"></td>
-                            <td><%= shift.check_in %></td>
-                            <td><%= shift.check_out %></td>
+                            <td><%= shift.check_in.strftime('%d-%_m-%Y%t%H:%M') %></td>
+                            <td><%= shift.check_out.strftime('%d-%_m-%Y%t%H:%M') %></td>
                             <td><%= (shift.check_out - shift.check_in)/3600 %></td>
                             <td><%= shift.employees.size %></td>
-                            <td>More info</td>
+                            <td><%= link_to 'More info', department_shift_path(@department.id, shift.id) %></td>
                         </tr>
                     <% end %>
                 </tbody>

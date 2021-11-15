@@ -13,9 +13,51 @@ class ShiftsController < ApplicationController
         end
     end
 
+    def show
+        id = params[:id]
+        @shift = Shift.find(id)
+        @employee_info = Array.new
+        @employee_status = Array.new
+        @employee_worktime = Array.new
+        @shift.department.employees.each do |employee|
+            @temp_worktime = 0
+            @temp_employee_info = Hash.new
+            @temp_employee_info[:name] = employee.name
+            employee.shifts.each do |shift|
+                # Check Employee Status
+                if overlap?(shift, @shift)
+                    @temp_employee_info[:status] = 'Occupied'
+                else
+                    if @temp_employee_info[:status] == '' or @temp_employee_info[:status].nil?
+                        @temp_employee_info[:status] = 'Free'
+                    end
+                end
+                            
+                # Calculate Employee Worktime
+                if same_date?(shift, @shift)
+                    @shift_worktime = (shift.check_out - shift.check_in)/3600
+                    @temp_worktime += @shift_worktime
+                end
+            end
+            @temp_employee_info[:worktime] = @temp_worktime
+            @employee_info.append(@temp_employee_info)
+        end
+        return @employee_info
+    end
+
     private
 
     def shift_params
         params.require(:shift).permit(:department)
     end
+
+    def overlap?(me, other)
+        me.check_in < other.check_out && other.check_in < me.check_out
+    end
+
+    def same_date?(me, other)
+        me, other = me.check_in.to_date, other.check_in.to_date
+        me == other
+    end
+
 end
