@@ -1,3 +1,11 @@
+body {
+    background-image: url('green_vector.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 100% 100%;
+  
+  }
+
 .card {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     margin: 8px;
@@ -7,7 +15,7 @@
 .item{
     margin: 0 20% 0 20%;
     padding: 8px;
-    background-color: snow;
+    background-color: none;
 }
 
 .department{
@@ -20,7 +28,7 @@
 }
 
 .department a{
-    font-size: xx-large;
+    font-size: x-large;
 }
 
 .container-block {
