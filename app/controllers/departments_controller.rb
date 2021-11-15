@@ -14,6 +14,15 @@ class DepartmentsController < ApplicationController
         end
     end
 
+    def show
+        id = params[:id]
+        begin
+            @department = Department.find(id)
+        rescue => exception
+            
+        end
+    end
+
 
     private
     

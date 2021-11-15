@@ -5,7 +5,7 @@ class SessionsController < ApplicationController
 
         if !!@user && @user.authenticate(params[:password])
             session[:user_id] = @user.id
-            redirect_to departments_index_path
+            redirect_to departments_path
         else
             message = "Something went wrong! redirect to register"
             redirect_to new_user_path
