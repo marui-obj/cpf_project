@@ -22,14 +22,16 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td><input type="checkbox"></td>
-                <td>9.00</td>
-                <td>16.00</td>
-                <td>7</td>
-                <td>40</td>
-                <td>More info</td>
-            </tr>
+            <% @department.shifts.each do |shift| %>
+                <tr>
+                    <td><input type="checkbox"></td>
+                    <td><%= shift.check_in %></td>
+                    <td><%= shift.check_out %></td>
+                    <td><%= (shift.check_out - shift.check_in)/3600 %></td>
+                    <td><%= shift.employees.size %></td>
+                    <td>More info</td>
+                </tr>
+            <% end %>
         </tbody>
     </table>
 </body>

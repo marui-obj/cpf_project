@@ -16,11 +16,13 @@ class DepartmentsController < ApplicationController
 
     def show
         id = params[:id]
-        begin
-            @department = Department.find(id)
-        rescue => exception
-            
-        end
+        # begin
+        @department = Department.find(id)
+
+        # rescue
+        #     redirect_to departments_path
+
+        # end
     end
 
 
