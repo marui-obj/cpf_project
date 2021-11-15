@@ -7,8 +7,9 @@ class UsersController < ApplicationController
     def create
         @user = User.new(user_params)
         if @user.save
-            redirect_to login_path
-        else 
+            redirect_to login_path, notice: "You can now login."
+        else
+            flash.alert = @user.errors.full_messages
             render :new
         end
     end

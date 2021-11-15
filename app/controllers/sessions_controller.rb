@@ -5,10 +5,11 @@ class SessionsController < ApplicationController
 
         if !!@user && @user.authenticate(params[:password])
             session[:user_id] = @user.id
-            redirect_to departments_path
+            redirect_to departments_path, notice: "Welcome: " + current_user.username
+        elsif !!@user && !@user.authenticate(params[:password])
+            redirect_to login_path, alert: "Incorrect username or password."
         else
-            message = "Something went wrong! redirect to register"
-            redirect_to new_user_path
+            redirect_to new_user_path, alert: "No User found."
         end
     end
 

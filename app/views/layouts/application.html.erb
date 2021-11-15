@@ -13,10 +13,13 @@
   <body>
     <div class = "header">
       <%= link_to 'Home'.html_safe,  departments_path%>
-      <%= link_to "Sign Out", '/logout', method: :delete %>
       <% if logged_in? %>
-        <h2> Welcome </h2>
-        <%=current_user.username %>
+        <%= link_to "Sign Out", '/logout', method: :delete %>
+      <% end %>
+      <% flash.each do |type, msg| %>
+        <div>
+          <%= msg %>
+        </div>
       <% end %>
     </div>
     <%= yield %>
