@@ -1,9 +1,62 @@
-<div>
-    <h2>Log In</h2>
-    <%= form_tag '/login' do %>
-        Username: <%= text_field_tag :username %><br>
-        Password: <%= password_field_tag :password %><br>
-        <%= submit_tag "Log In" %>
-        <%= link_to 'Register',  new_user_path%>
-    <% end %>
-</div>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <div class="login-block">
+        <div class="container h-100 ">
+            <div class="row h-100 justify-content-center align-items-center">
+                <div class="card">
+                    <h4 class="card-header">Login</h4>
+                    <div class="card-body">
+                        <% flash.each do |type, msg| %>
+                            <div class="alert alert-danger" role="alert">
+                                <%= msg %>
+                            </div>
+                        <% end %>
+                        <form data-toggle="validator" role="form" method="post" action="#">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Username</label>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fa fa-envelope-open-o" aria-hidden="true"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control" name="username" value="" pattern=".{4,}" title="Four or more characters" required="">
+                                        </div>
+                                        <div class="help-block with-errors text-danger"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Password</label>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fa fa-unlock" aria-hidden="true"></i></span>
+                                            </div>
+                                            <input type="password" name="password" class="form-control" pattern=".{4,}" title="Four or more characters" required="">
+                                        </div>
+                                        <div class="help-block with-errors text-danger"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <input type="hidden" name="redirect" value="">
+                                    <input type="submit" class="btn btn-primary btn-lg btn-block" value="Login" name="submit">
+                                </div>
+                            </div>
+                        </form>
+                        <div class="clear"></div>
+                        <i class="fa fa-user fa-fw"></i>  Don't have an account yet? <a href="#">Register</a><br>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
