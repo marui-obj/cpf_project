@@ -59,10 +59,11 @@
             <div class="OT">
                 <a>OT</a>
                 <div class="manageOT">
-                    <input type="text" placeholder="Hour" value="">
-                    <br>
-                    <button>Increase</button>
-                    <button>Decrease</button>
+                    <%= form_tag department_shift_path, method: :put do %>
+                        <%= text_field_tag :amount %>
+                        <%= submit_tag 'Increase', name: 'increase' %>
+                        <%= submit_tag 'Decrease', name: 'decrease' %>
+                    <% end %>
                 </div>
             </div>
         </div>

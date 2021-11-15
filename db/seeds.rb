@@ -39,17 +39,17 @@ yee3.department = pluck
 yee3.save
 
 # Create Shift
-ka1 = Shift.new(:check_in=>"15-11-2021 00:00", :check_out=>"15-11-2021 8:00")
+ka1 = Shift.new(:check_in=>"15-11-2021 00:00", :check_out=>"15-11-2021 8:00", :overtime=>1)
 ka1.department = pluck
 ka1.employees = [yee1]
 ka1.save
 
-ka2 = Shift.new(:check_in=>"15-11-2021 8:00", :check_out=>"15-11-2021 16:00")
+ka2 = Shift.new(:check_in=>"15-11-2021 8:00", :check_out=>"15-11-2021 16:00", :overtime=>2)
 ka2.department = pluck
 ka2.employees = [yee1, yee2]
 ka2.save
 
-ka3 = Shift.new(:check_in=>"15-11-2021 16:00", :check_out=>"16-11-2021 00:00")
+ka3 = Shift.new(:check_in=>"15-11-2021 16:00", :check_out=>"16-11-2021 00:00", :overtime=>3)
 ka3.department = pluck
 ka3.employees = [yee1, yee2, yee3]
 ka3.save
