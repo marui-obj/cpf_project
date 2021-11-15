@@ -3,67 +3,69 @@
 <head>
 </head>
 <body>
-    <div class="top">
-        <a id="date"></a>
-        <button class="actual">Actual</button>
-        <button class="plan">Plan</button>
-    </div>
-    <div class="group">
-        <table>
-            <thead>
-                <tr>
-                    <th><input type="checkbox" id="select-all">Select All</th>
-                    <th>Name</th>
-                    <th>Entry Time</th>
-                    <th>Exit Time</th>
-                    <th>OT</th>
-                    <th>Remove</th>
-                </tr>
-            </thead>
-            <tbody>
-                <% @shift.employees.each do |employee|%>
+    <div class="shift-detail">
+        <div class="above">
+            <a id="date"></a>
+            <button class="actual">Actual</button>
+            <button class="plan">Plan</button>
+        </div>
+        <div class="group">
+            <table>
+                <thead>
                     <tr>
-                        <td><input type="checkbox"></td>
-                        <td><%= employee.name%></td>
-                        <td><%= @shift.check_in.strftime('%d-%_m-%Y%t%H:%M')%></td>
-                        <td><%= @shift.check_out.strftime('%d-%_m-%Y%t%H:%M')%></td>
-                        <td><%= @shift.overtime %></td>
-                        <td>More info</td>
+                        <th><input type="checkbox" id="select-all">Select All</th>
+                        <th>Name</th>
+                        <th>Entry Time</th>
+                        <th>Exit Time</th>
+                        <th>OT</th>
+                        <th>Remove</th>
                     </tr>
-                <% end %>
-            </tbody>
-        </table>
-        <div class="content-right">
-            <div class="add-worker">
-                <table>
-                    <thead>
+                </thead>
+                <tbody>
+                    <% @shift.employees.each do |employee|%>
                         <tr>
-                            <th>Name</th>
-                            <th>Status</th>
-                            <th>Work Time</th>
-                            <th>Add</th>
+                            <td><input type="checkbox"></td>
+                            <td><%= employee.name%></td>
+                            <td><%= @shift.check_in.strftime('%d-%_m-%Y%t%H:%M')%></td>
+                            <td><%= @shift.check_out.strftime('%d-%_m-%Y%t%H:%M')%></td>
+                            <td><%= @shift.overtime %></td>
+                            <td>More info</td>
                         </tr>
-                    </thead>
-                    <tbody>
-                        <% @employee_info.each do |employee| %>
-                            <tr>
-                                <td><%= employee[:name] %></td>
-                                <td><%= employee[:status] %></td>
-                                <td><%= employee[:worktime] %></td>
-                                <td><button>Assign</button></td>
-                            </tr>
-                        <% end %>
-                    </tbody>
-                </table>
-            </div>
-            <div class="OT">
-                <a>OT</a>
-                <div class="manageOT">
-                    <%= form_tag department_shift_path, method: :put do %>
-                        <%= text_field_tag :amount %>
-                        <%= submit_tag 'Increase', name: 'increase' %>
-                        <%= submit_tag 'Decrease', name: 'decrease' %>
                     <% end %>
+                </tbody>
+            </table>
+            <div class="content-right">
+                <div class="add-worker">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Status</th>
+                                <th>Work Time</th>
+                                <th>Add</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% @employee_info.each do |employee| %>
+                                <tr>
+                                    <td><%= employee[:name] %></td>
+                                    <td><%= employee[:status] %></td>
+                                    <td><%= employee[:worktime] %></td>
+                                    <td><button>Assign</button></td>
+                                </tr>
+                            <% end %>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="OT">
+                    <a>OT</a>
+                    <div class="manageOT">
+                        <%= form_tag department_shift_path, method: :put do %>
+                            <%= text_field_tag :amount %>
+                            <%= submit_tag 'Increase', name: 'increase' %>
+                            <%= submit_tag 'Decrease', name: 'decrease' %>
+                        <% end %>
+                    </div>
                 </div>
             </div>
         </div>
