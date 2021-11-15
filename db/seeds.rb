@@ -5,9 +5,8 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-
 # Create Manager
-user1 = User.create!(:username=>"admin", :password_digest=>"password")
+user1 = User.create!(:username=>"admin", :password_digest=> BCrypt::Password.create("my password"))
 boss = Manager.new(:name=>"admin")
 boss.user = user1
 boss.save
@@ -17,22 +16,22 @@ pluck = Department.new(:title=>"Plucking")
 pluck.manager = boss
 pluck.save
 
-# Create Employee
-user2 = User.create!(:username=>"yee1" :password_digest=>"yee1")
+#Create Employee
+user2 = User.create!(:username=>"yee1", :password_digest=>BCrypt::Password.create("my password"))
 user2.save
 yee1 = Employee.new(:name=>"yee1")
 yee1.user = user2
 yee1.department = pluck
 yee1.save
 
-user3 = User.create!(:username=>"yee2" :password_digest=>"yee2")
+user3 = User.create!(:username=>"yee2", :password_digest=>BCrypt::Password.create("my password"))
 user3.save
 yee2 = Employee.new(:name=>"yee2")
 yee2.user = user3
 yee2.department = pluck
 yee2.save
 
-user4 = User.create!(:username=>"yee3" :password_digest=>"yee3")
+user4 = User.create!(:username=>"yee3", :password_digest=>BCrypt::Password.create("my password"))
 user4.save
 yee3 = Employee.new(:name=>"yee3")
 yee3.user = user4
