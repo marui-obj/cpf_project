@@ -17,17 +17,17 @@
     background-color: #e65656;
     border: 2px solid #467fb9;
 }
-.container{
+.group{
     margin-top: 20px;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-between;
 }
-.container table, .container td, .container th {
+.group table, .group td, .group th {
     border: 2px solid rgb(255, 175, 71);
 }
-.container table{
+.group table{
     flex-basis: 70%;
     border-collapse: collapse;
     text-align: center;
