@@ -1,4 +1,5 @@
 class DepartmentsController < ApplicationController
+    before_action :authorize
 
     def new
         @department = Department.new
@@ -12,6 +13,7 @@ class DepartmentsController < ApplicationController
             render :new
         end
     end
+
 
     private
     

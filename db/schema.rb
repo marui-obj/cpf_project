@@ -10,11 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
-ActiveRecord::Schema.define(version: 2021_11_12_153841) do
-=======
 ActiveRecord::Schema.define(version: 2021_11_13_171942) do
->>>>>>> origin/WorkDb
 
   create_table "departments", force: :cascade do |t|
     t.string "title"
@@ -35,11 +31,6 @@ ActiveRecord::Schema.define(version: 2021_11_13_171942) do
     t.index ["user_id"], name: "index_employees_on_user_id"
   end
 
-<<<<<<< HEAD
-  create_table "managers", force: :cascade do |t|
-    t.string "name"
-    t.string "uid"
-=======
   create_table "employees_shifts", id: false, force: :cascade do |t|
     t.integer "employee_id", null: false
     t.integer "shift_id", null: false
@@ -51,7 +42,6 @@ ActiveRecord::Schema.define(version: 2021_11_13_171942) do
     t.string "name"
     t.string "uid"
     t.integer "user_id"
->>>>>>> origin/WorkDb
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_managers_on_user_id"
