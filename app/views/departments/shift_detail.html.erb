@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="../../javascript/packs/select.js"></script>
+</head>
+<body>
+    <div class="top">
+        <a id="date"></a>
+        <button class="actual">Actual</button>
+        <button class="plan">Plan</button>
+    </div>
+    <div class="container">
+        <table>
+            <thead>
+                <tr>
+                    <th><input type="checkbox" id="select-all">Select All</th>
+                    <th>Entry Time</th>
+                    <th>Exit Time</th>
+                    <th>Shift hours</th>
+                    <th>Number of Employees</th>
+                    <th>Manage</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><input type="checkbox"></td>
+                    <td>9.00</td>
+                    <td>16.00</td>
+                    <td>7</td>
+                    <td>40</td>
+                    <td>More info</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="content-right">
+            <div class="add-worker">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Status</th>
+                            <th>Work Time</th>
+                            <th>Add</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>SomeOne Likeme</td>
+                            <td>Free</td>
+                            <td>0</td>
+                            <td><button>Assign</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="OT">
+                <a>OT</a>
+                <div class="manageOT">
+                    <input type="text" placeholder="Hour" value="">
+                    <br>
+                    <button>Increase</button>
+                    <button>Decrease</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
