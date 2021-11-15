@@ -1,5 +1,4 @@
 class DepartmentsController < ApplicationController
-<<<<<<< HEAD
 
     def new
         @department = Department.new
@@ -21,8 +20,3 @@ class DepartmentsController < ApplicationController
     end
     
 end
-=======
-  def index
-  end
-end
->>>>>>> origin/M-M
