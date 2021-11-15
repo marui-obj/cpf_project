@@ -10,32 +10,57 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 2021_11_12_153841) do
+=======
+ActiveRecord::Schema.define(version: 2021_11_13_171942) do
+>>>>>>> origin/WorkDb
 
   create_table "departments", force: :cascade do |t|
     t.string "title"
-    t.datetime "check_in"
-    t.datetime "check_out"
-    t.datetime "overtime"
+    t.integer "manager_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["manager_id"], name: "index_departments_on_manager_id"
   end
 
   create_table "employees", force: :cascade do |t|
     t.string "name"
     t.string "uid"
+    t.integer "user_id"
+    t.integer "department_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["department_id"], name: "index_employees_on_department_id"
+    t.index ["user_id"], name: "index_employees_on_user_id"
+  end
+
+<<<<<<< HEAD
+  create_table "managers", force: :cascade do |t|
+    t.string "name"
+    t.string "uid"
+=======
+  create_table "employees_shifts", id: false, force: :cascade do |t|
+    t.integer "employee_id", null: false
+    t.integer "shift_id", null: false
+    t.index ["employee_id", "shift_id"], name: "index_employees_shifts_on_employee_id_and_shift_id"
+    t.index ["shift_id", "employee_id"], name: "index_employees_shifts_on_shift_id_and_employee_id"
   end
 
   create_table "managers", force: :cascade do |t|
     t.string "name"
     t.string "uid"
+    t.integer "user_id"
+>>>>>>> origin/WorkDb
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_managers_on_user_id"
   end
 
   create_table "shifts", force: :cascade do |t|
+    t.datetime "check_in"
+    t.datetime "check_out"
+    t.integer "overtime"
     t.integer "department_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
