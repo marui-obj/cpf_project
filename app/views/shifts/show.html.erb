@@ -14,22 +14,24 @@
             <thead>
                 <tr>
                     <th><input type="checkbox" id="select-all">Select All</th>
+                    <th>Name</th>
                     <th>Entry Time</th>
                     <th>Exit Time</th>
-                    <th>Shift hours</th>
-                    <th>Number of Employees</th>
-                    <th>Manage</th>
+                    <th>OT</th>
+                    <th>Remove</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td><input type="checkbox"></td>
-                    <td>9.00</td>
-                    <td>16.00</td>
-                    <td>7</td>
-                    <td>40</td>
-                    <td>More info</td>
-                </tr>
+                <% @shift.employees.each do |employee|%>
+                    <tr>
+                        <td><input type="checkbox"></td>
+                        <td><%= employee.name%></td>
+                        <td><%= @shift.check_in.strftime('%d-%_m-%Y%t%H:%M')%></td>
+                        <td><%= @shift.check_out.strftime('%d-%_m-%Y%t%H:%M')%></td>
+                        <td><%= @shift.overtime %></td>
+                        <td>More info</td>
+                    </tr>
+                <% end %>
             </tbody>
         </table>
         <div class="content-right">
@@ -44,12 +46,14 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>SomeOne Likeme</td>
-                            <td>Free</td>
-                            <td>0</td>
-                            <td><button>Assign</button></td>
-                        </tr>
+                        <% @employee_info.each do |employee| %>
+                            <tr>
+                                <td><%= employee[:name] %></td>
+                                <td><%= employee[:status] %></td>
+                                <td><%= employee[:worktime] %></td>
+                                <td><button>Assign</button></td>
+                            </tr>
+                        <% end %>
                     </tbody>
                 </table>
             </div>
