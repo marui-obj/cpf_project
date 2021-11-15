@@ -26,6 +26,12 @@ body{
 
 .header a{
     text-decoration: none;
-    font-weight: solid;
     font-size: 30pt;    
+}
+
+.user{
+    float: right;
+    .name a, button{
+        vertical-align: middle;
+    }
 }
