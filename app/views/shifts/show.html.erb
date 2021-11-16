@@ -5,7 +5,9 @@
 <body>
     <div class="shift-detail">
         <div class="above">
-            <a id="date"></a>
+            <%= @shift.department.title %>
+            <%= @shift.check_in.to_date.strftime('%d-%_m-%Y') %>
+            <%# <a id="date"></a> %>
             <button class="actual">Actual</button>
             <button class="plan">Plan</button>
         </div>
@@ -29,7 +31,7 @@
                             <td><%= @shift.check_in.strftime('%d-%_m-%Y%t%H:%M')%></td>
                             <td><%= @shift.check_out.strftime('%d-%_m-%Y%t%H:%M')%></td>
                             <td><%= @shift.overtime %></td>
-                            <td>More info</td>
+                            <td><%= link_to 'Remove', ""%></td>
                         </tr>
                     <% end %>
                 </tbody>

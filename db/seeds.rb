@@ -7,33 +7,45 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 # Create Manager
 user1 = User.create!(:username=>"admin", :password_digest=> BCrypt::Password.create("my password"))
-boss = Manager.new(:name=>"admin")
+boss = Manager.new(:name=>"Thanakorn Boriboon")
 boss.user = user1
 boss.save
 
 # Create Department
-pluck = Department.new(:title=>"Plucking")
+pluck = Department.new(:title=>"งานถอนขนไก่")
 pluck.manager = boss
 pluck.save
+
+kill = Department.new(:title=>"งานเชือดไก่")
+kill.manager = boss
+kill.save
+
+qc = Department.new(:title=>"งานไก่ตกราว")
+qc.manager = boss
+qc.save
+
+store = Department.new(:title=>"งานจัดเก็บและจ่ายสินค้าแช่แข็ง")
+store.manager = boss
+store.save
 
 #Create Employee
 user2 = User.create!(:username=>"yee1", :password_digest=>BCrypt::Password.create("my password"))
 user2.save
-yee1 = Employee.new(:name=>"yee1")
+yee1 = Employee.new(:name=>"Thanadon Watcharawilairat")
 yee1.user = user2
 yee1.department = pluck
 yee1.save
 
 user3 = User.create!(:username=>"yee2", :password_digest=>BCrypt::Password.create("my password"))
 user3.save
-yee2 = Employee.new(:name=>"yee2")
+yee2 = Employee.new(:name=>"Purin Petch-in")
 yee2.user = user3
 yee2.department = pluck
 yee2.save
 
 user4 = User.create!(:username=>"yee3", :password_digest=>BCrypt::Password.create("my password"))
 user4.save
-yee3 = Employee.new(:name=>"yee3")
+yee3 = Employee.new(:name=>"Phasit Sangklub")
 yee3.user = user4
 yee3.department = pluck
 yee3.save

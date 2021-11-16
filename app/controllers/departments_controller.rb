@@ -14,6 +14,10 @@ class DepartmentsController < ApplicationController
         end
     end
 
+    def index
+        @department = Department.all
+    end
+
     def show
         id = params[:id]
         # begin
