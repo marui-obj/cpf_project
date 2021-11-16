@@ -42,7 +42,25 @@ class ShiftsController < ApplicationController
             @temp_employee_info[:worktime] = @temp_worktime
             @employee_info.append(@temp_employee_info)
         end
-        return @employee_info
+    end
+
+    def update
+        @id = params[:id]
+        @shift = Shift.find(@id)
+        @amount = params[:amount]
+        # redirect_to :root
+        if params.key?("increase")
+            print "hello"
+            flash[:notice] = "hello"
+            @shift.overtime += @amount.to_f
+        elsif params.key?("decrease")
+            @shift.overtime -= @amount.to_f
+        end
+        @shift.update(:overtime=>@shift.overtime)
+        @shift.employees.each do |employee|
+            employee.save
+        end
+        redirect_to department_shift_path(params[:department_id], @id)
     end
 
     private

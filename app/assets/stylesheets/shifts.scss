@@ -1,19 +1,21 @@
-
-.top{
+.shift-detail{
+    margin: 0 10% 0 10% ; 
+}
+.above{
     margin-top: 20px;
     font-size: 2em;
 }
-.top button{
+.above button{
     padding: 6px 10px 6px 10px;
     float: right;
     margin-top: 8px;
     margin-right: 10px;
 }
-.top .plan:hover{
+.above .plan:hover{
     background-color: #56e686;
     border: 2px solid #467fb9;
 }
-.top .actual:hover{
+.above .actual:hover{
     background-color: #e65656;
     border: 2px solid #467fb9;
 }
@@ -32,7 +34,7 @@
     border: 2px solid rgb(255, 175, 71);
 }
 .group table{
-    flex-basis: 70%;
+    width: 60%;
     border-collapse: collapse;
     text-align: center;
     font-size: 18px;
@@ -42,6 +44,9 @@
     align-content: flex-end;
     display: flex;
     flex-direction: column;
+    .add-worker table{
+        width: 100%;
+    }
 }
 .OT{
     margin-top: 20px;
@@ -56,8 +61,4 @@
 .OT .manageOT input{
     margin: 10px;
     width: 90%;
-}
-.OT .manageOT button{
-    margin: 0 0 10px 10px;
-    width: 44%;
 }

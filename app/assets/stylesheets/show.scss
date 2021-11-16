@@ -20,15 +20,14 @@
 table, td, th {
     border: 2px solid rgb(255, 175, 71);
 }
-table{
-    margin-top: 20px;
-    width: 100%;
-    border-collapse: collapse;
-    text-align: center;
-    font-size: 18px;
-    background-color: #eefdfc;
-}
-
 .show{
     margin: 0 10% 0 10% ; 
+    table{
+        margin-top: 20px;
+        width: 100%;
+        border-collapse: collapse;
+        text-align: center;
+        font-size: 18px;
+        background-color: #eefdfc;
+    }
 } 
