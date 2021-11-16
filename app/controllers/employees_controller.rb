@@ -13,6 +13,14 @@ class EmployeesController < ApplicationController
         end
     end
 
+    def show
+        @user = User.find_by(params[:id])
+    end
+
+    def index
+        @employee = current_user.employee
+    end
+
     private
 
     def employee_params

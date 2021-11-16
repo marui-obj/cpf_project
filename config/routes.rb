@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   resources :departments do
     resources :shifts
   end
+  resources :employees
 
   get '/login', to: 'sessions#login'
   post '/login', to: 'sessions#create'

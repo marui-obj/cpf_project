@@ -12,7 +12,7 @@ class SessionsController < ApplicationController
                 redirect_to departments_path, notice: "Welcome manager: " + current_user.username
             elsif is_employee?
                 # if login as employee
-                redirect_to departments_path, notice: "Welcome employee: " + current_user.username
+                redirect_to employees_path, notice: "Welcome employee: " + current_user.username
             else
                 # if this account is currently not assign role
                 redirect_to login_path, alert: "Something went Wrong. Contact admin for more information. "
