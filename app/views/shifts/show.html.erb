@@ -12,60 +12,67 @@
             <button class="plan">Plan</button>
         </div>
         <div class="group">
-            <table>
-                <thead>
-                    <tr>
-                        <th><input type="checkbox" id="select-all">Select All</th>
-                        <th>Name</th>
-                        <th>Entry Time</th>
-                        <th>Exit Time</th>
-                        <th>OT</th>
-                        <th>Remove</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <% @shift.employees.each do |employee|%>
+            <%= form_tag department_shift_path, :method => :delete do %>
+                <table>
+                    <thead>
                         <tr>
-                            <td><input type="checkbox"></td>
-                            <td><%= employee.name%></td>
-                            <td><%= @shift.check_in.strftime('%d-%_m-%Y%t%H:%M')%></td>
-                            <td><%= @shift.check_out.strftime('%d-%_m-%Y%t%H:%M')%></td>
-                            <td><%= @shift.overtime %></td>
-                            <td><%= link_to 'Remove', ""%></td>
+                            <th><input type="checkbox" id="select-all">Select All</th>
+                            <th>Name</th>
+                            <th>Entry Time</th>
+                            <th>Exit Time</th>
+                            <th>OT</th>
+                            <th>Remove</th>
                         </tr>
-                    <% end %>
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        <% @shift.employees.each_with_index do |employee, index|%>
+                            <tr>
+                                <%= text_field_tag "cur_employee_id_#{index+1}".to_sym, employee.id, type: "hidden" %>
+                                <td><input type="checkbox"></td>
+                                <td><%= employee.name%></td>
+                                <td><%= @shift.check_in.strftime('%d-%_m-%Y%t%H:%M')%></td>
+                                <td><%= @shift.check_out.strftime('%d-%_m-%Y%t%H:%M')%></td>
+                                <td><%= @shift.overtime %></td>
+                                <td><%= submit_tag "Remove", name: "remove_#{index+1}", :class => 'button' %></td>
+                            </tr>
+                        <% end %>
+                    </tbody>
+                </table>
+            <% end %>
             <div class="content-right">
                 <div class="add-worker">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Status</th>
-                                <th>Work Time</th>
-                                <th>Add</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <% @employee_info.each do |employee| %>
+                    <%= form_tag department_shift_path, :method => :put do %>
+                        <table>
+                            <thead>
                                 <tr>
-                                    <td><%= employee[:name] %></td>
-                                    <td><%= employee[:status] %></td>
-                                    <td><%= employee[:worktime] %></td>
-                                    <td><button>Assign</button></td>
+                                    <th>Name</th>
+                                    <th>Status</th>
+                                    <th>Work Time</th>
+                                    <th>Add</th>
                                 </tr>
-                            <% end %>
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                <% @employee_info.each_with_index do |employee, index| %>
+                                    <tr>
+                                        <%= text_field_tag "employee_id_#{index+1}".to_sym, employee[:id], type: "hidden" %>
+                                        <td><%= employee[:name] %></td>
+                                        <td><%= employee[:status] %></td>
+                                        <td><%= employee[:worktime] %></td>
+                                        <td><%= submit_tag "Assign", name: "assign_#{index+1}", :class => 'button' %></td>
+                                        <%# <td><button>Assign</button></td> %>
+                                    </tr>
+                                <% end %>
+                            </tbody>
+                        </table>
+                    <% end %>
                 </div>
                 <div class="OT">
                     <a>OT</a>
                     <div class="manageOT">
                         <%= form_tag department_shift_path, method: :put do %>
                             <%= text_field_tag :amount %>
-                            <%= submit_tag 'Increase', name: 'increase' %>
-                            <%= submit_tag 'Decrease', name: 'decrease' %>
+                            <%= submit_tag 'Increase', name: 'increase', :class => 'button' %>
+                            <%= submit_tag 'Decrease', name: 'decrease', :class => 'button' %>
                         <% end %>
                     </div>
                 </div>
