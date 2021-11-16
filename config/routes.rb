@@ -10,7 +10,7 @@ Rails.application.routes.draw do
 
   get '/login', to: 'sessions#login'
   post '/login', to: 'sessions#create'
-  delete '/logout', to: 'sessions#destroy'
+  get '/logout', to: 'sessions#destroy'
   # put '/departments/:department_id/shifts/:id', to: 'shifts#update', as: :manage_ot
   # delete '/departments/:department_id/shifts/:id', to: 'shifts#destroy', as: :delete_department_shift
 
