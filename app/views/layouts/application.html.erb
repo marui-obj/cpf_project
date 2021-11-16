@@ -19,7 +19,7 @@
           <% if @current_user %>       
             <%= @current_user.username %>
           <% end %>
-          <% if logged_in? %> 
+          <% if logged_in? %>
             <%= link_to '<button>Sign Out</button>'.html_safe, '/logout', method: :delete %>
           <% end %>
         </div>
