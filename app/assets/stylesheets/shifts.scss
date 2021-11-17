@@ -1,64 +1,63 @@
-.shift-detail{
-    margin: 0 10% 0 10% ; 
-}
-.above{
-    margin-top: 20px;
-    font-size: 2em;
-}
-.above button{
-    padding: 6px 10px 6px 10px;
-    float: right;
-    margin-top: 8px;
-    margin-right: 10px;
-}
-.above .plan:hover{
-    background-color: #56e686;
-    border: 2px solid #467fb9;
-}
-.above .actual:hover{
-    background-color: #e65656;
-    border: 2px solid #467fb9;
-}
-.above a{
-    display: inline;
-}
+// .shift-detail{
+//     margin: 0 10% 0 10% ; 
+// }
+// .above{
+//     margin-top: 20px;
+//     font-size: 2em;
+// }
+// .above button{
+//     padding: 6px 10px 6px 10px;
+//     float: right;
+//     margin-top: 8px;
+//     margin-right: 10px;
+// }
+// .above .plan:hover{
+//     background-color: #56e686;
+//     border: 2px solid #467fb9;
+// }
+// .above .actual:hover{
+//     background-color: #e65656;
+//     border: 2px solid #467fb9;
+// }
+// .above a{
+//     display: inline;
+// }
 
-.group{
-    margin-top: 20px;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-between;
-}
-.group table, .group td, .group th {
-    border: 2px solid rgb(255, 175, 71);
-}
-.group table{
-    width: 60%;
-    border-collapse: collapse;
-    text-align: center;
-    font-size: 18px;
-    background-color: #eefdfc;
-}
-.content-right{
-    align-content: flex-end;
-    display: flex;
-    flex-direction: column;
-    .add-worker table{
-        width: 100%;
-    }
-}
-.OT{
-    margin-top: 20px;
-}
-.OT a{
-    font-size: 2em;
-}
-.OT .manageOT{
-    border: 2px solid rgb(255, 175, 71);
-    background-color: #eefdfc;
-}
-.OT .manageOT input{
-    margin: 10px;
-    width: 90%;
-}
+// .group{
+//     margin-top: 20px;
+//     display: flex;
+//     flex-direction: row;
+//     flex-wrap: wrap;
+//     justify-content: space-between;
+// }
+// .group table, .group td, .group th {
+//     border: 2px solid rgb(255, 175, 71);
+// }
+// .group table{
+//     border-collapse: collapse;
+//     text-align: center;
+//     font-size: 18px;
+//     background-color: #eefdfc;
+// }
+// .content-right{
+//     align-content: flex-end;
+//     display: flex;
+//     flex-direction: column;
+//     .add-worker table{
+//         width: 100%;
+//     }
+// }
+// .OT{
+//     margin-top: 20px;
+// }
+// .OT a{
+//     font-size: 2em;
+// }
+// .OT .manageOT{
+//     border: 2px solid rgb(255, 175, 71);
+//     background-color: #eefdfc;
+// }
+// .OT .manageOT input{
+//     margin: 10px;
+//     width: 90%;
+// }

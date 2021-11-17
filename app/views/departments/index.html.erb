@@ -8,11 +8,11 @@
 </head>
 <body>
     <%= render :partial => 'flash' %>
-            <h1>Departments <span id='date'></span></h1>
             <div class="container w-50">
+                <h1 class="text-center my-3 text">Departments <span id='date'></span></h1>
                 <div class="row">
-                    <div class="col-md">
-                        <% @departments.each_with_index do |department, index| %>
+                    <% @departments.each_with_index do |department, index| %>
+                        <div class="col-sm-6">
                             <div class = "card">
                                 <div class="card-body">
                                     <h5 class="card-title"><%= department.title %></h5>
@@ -23,8 +23,8 @@
                                     <%= link_to '<button>details</button>'.html_safe,  department_path(department.id)%>
                                 </div>
                             </div>
-                        <% end %>
-                    </div>
+                        </div>
+                    <% end %>
                 </div>
             </div>
                                                     
