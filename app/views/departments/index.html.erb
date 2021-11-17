@@ -2,30 +2,37 @@
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
     <%= render :partial => 'flash' %>
-        <div class="container w-50">
-            <h1 class="text-center my-3 text">Departments <span id='date'></span></h1>
-            <div class="row">
-                <% @departments.each_with_index do |department, index| %>
-                    <div class="col-sm-6">
-                        <div class = "card">
-                            <div class="card-body">
-                                <h5 class="card-title"><%= department.title %></h5>
-                                <p class="card-text">Manager: <%= department.manager.name %><br>
-                                    Employee Amount: <%= department.employees.size %><br>
-                                    Shift Amount: <%= department.shifts.size %>
-                                </p>
-                                <%= link_to '<button>details</button>'.html_safe,  department_path(department.id)%>
-                            </div>
+    <div class="container w-50">
+        <div class="my-3 d-flex justify-content-center">
+            <h1 class="text">Departments <span id='date'></span></h1>
+            <h1 class="ml-3 align-self-center"><span id="datepicker"><i class="fa fa-calendar"></i></span></h1>
+        </div>
+        <div class="row">
+            <% @departments.each_with_index do |department, index| %>
+                <div class="col-sm-6">
+                    <div class = "card">
+                        <div class="card-body">
+                            <h5 class="card-title"><%= department.title %></h5>
+                            <p class="card-text">Manager: <%= department.manager.name %><br>
+                                Employee Amount: <%= department.employees.size %><br>
+                                Shift Amount: <%= department.shifts.size %>
+                            </p>
+                            <%= link_to '<button>details</button>'.html_safe,  department_path(department.id)%>
                         </div>
                     </div>
-                <% end %>
-            </div>
-        </div>                                      
+                </div>
+            <% end %>
+        </div>
+    </div>                                           
 </body>
 </html>
