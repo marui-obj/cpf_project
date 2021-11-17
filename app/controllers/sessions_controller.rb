@@ -15,13 +15,13 @@ class SessionsController < ApplicationController
                 redirect_to employees_path, notice: "Welcome employee: " + current_user.username
             else
                 # if this account is currently not assign role
+                session.delete(:user_id)
                 redirect_to login_path, alert: "Something went Wrong. Contact admin for more information. "
-
             end
         elsif !!@user && !@user.authenticate(params[:password])
             redirect_to login_path, alert: "Incorrect username or password."
         else
-            redirect_to new_user_path, alert: "No User found."
+            redirect_to login_path, alert: "No User found."
         end
     end
 
