@@ -8,19 +8,20 @@
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
   </head>
     <nav class="navbar navbar-light bg-light">
       <div class="navbar-brand">
-        <%= image_tag "pog.png", height: 50 %>
+        <%= image_tag "CPF.png", height: 50 %>
         <% if is_manager?%>
           <%= link_to "Home", departments_path, class: "navbar-brand" %>
-        <% else %>
+        <% elsif is_employee? %>
           My Shift
         <% end %>
       </div>
       <% if logged_in? %>
         <div class="d-flex">
-          <a class="align-self-center mr-2"><%= current_user.username %></a>
+          <a class="align-self-center mr-2"><i class="fa fa-user" aria-hidden="true"></i> <%= current_user.username %></a>
           <%= link_to '<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Logout</button>'.html_safe, '/logout', method: :delete %>
         </div>
       <% end %>
