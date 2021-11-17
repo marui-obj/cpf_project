@@ -1,5 +1,7 @@
 class DepartmentsController < ApplicationController
     before_action :authorize
+    before_action :can_enter?
+    
 
     def new
         @department = Department.new
