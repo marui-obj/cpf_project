@@ -13,25 +13,3 @@
  *= require_tree .
  *= require_self
  */
-
-body{
-    background-color: snow;
-}
-
-.header{
-    background-color: #c9eeeb;
-    border: 4px solid rgb(255, 175, 71);
-    border-radius: 6px;
-}
-
-.header a{
-    text-decoration: none;
-    font-size: 30pt;    
-}
-
-.user{
-    float: right;
-    .name a, button{
-        vertical-align: middle;
-    }
-}

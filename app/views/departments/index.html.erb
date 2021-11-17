@@ -1,27 +1,32 @@
 <!DOCTYPE html>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <html>
 <head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
     <%= render :partial => 'flash' %>
-    <div class = "item">
-        <div class ="container-block">
             <h1>Departments <span id='date'></span></h1>
-            <div class="main">
-                <% @departments.each_with_index do |department, index| %>
-                    <div class = "department">
-                        <a><%= department.title %></a>
-                        <p>Manager: <%= department.manager.name %><br>
-                        Employee Amount: <%= department.employees.size %><br>
-                        Shift Amount: <%= department.shifts.size %></p>
-                        <%= link_to '<button>details</button>'.html_safe,  department_path(department.id)%>
+            <div class="container w-50">
+                <div class="row">
+                    <div class="col-md">
+                        <% @departments.each_with_index do |department, index| %>
+                            <div class = "card">
+                                <div class="card-body">
+                                    <h5 class="card-title"><%= department.title %></h5>
+                                    <p class="card-text">Manager: <%= department.manager.name %><br>
+                                        Employee Amount: <%= department.employees.size %><br>
+                                        Shift Amount: <%= department.shifts.size %>
+                                    </p>
+                                    <%= link_to '<button>details</button>'.html_safe,  department_path(department.id)%>
+                                </div>
+                            </div>
+                        <% end %>
                     </div>
-                    <% if index.even? %>
-                        <div class="space"></div>
-                    <% end %>
-                <% end %>                                
+                </div>
             </div>
-        <div>
-    </div>
+                                                    
 </body>
 </html>
