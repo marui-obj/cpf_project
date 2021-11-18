@@ -41,53 +41,20 @@ class ShiftsController < ApplicationController
     end
 
     def update
-        # Manage OT
         @id = params[:id]
         @shift = Shift.find(@id)
         @department_id = @shift.department.id
-        if params.key?("increase") or params.key?("decrease")
-            @amount = params[:amount]
-            # redirect_to :root
-            if params.key?("increase")
-                print "hello"
-                flash[:notice] = "hello"
-                @shift.overtime += @amount.to_f
-            elsif params.key?("decrease")
-                @shift.overtime -= @amount.to_f
-            end
-            @shift.update(:overtime=>@shift.overtime)
-            @shift.employees.each do |employee|
-                employee.save
-            end
-        # Assign Worker
+
+        if params.key?("manage_ot")
+            manage_ot
         elsif params.value?("Assign")
-            puts params.to_s
-            assign_key = eval(params.to_s).invert["Assign"].sub(/assign_/,"").to_i
-            employee_id = params["employee_id_#{assign_key}".to_sym]
-            employee = Employee.find(employee_id)
-            unless @shift.employees.include?(employee)
-                @shift.employees.append(employee)
-                employee.save
-            end
+            assign_employee
+        elsif params.value?("Remove")
+            remove_employee
         end
         redirect_to department_shift_path(@department_id, @id)
     end
 
-    def destroy
-        @shift = Shift.find(params[:id])
-        remove_key = eval(params.to_s).invert["Remove"].sub(/remove_/,"").to_i
-        employee_id = params["cur_employee_id_#{remove_key}".to_sym]
-        employee = Employee.find(employee_id)
-        employees = Array.new
-        @shift.employees.each do |target|
-            if target.id != employee.id
-                employees.append(target)
-            end
-        end
-        @shift.employees = employees
-        @shift.save
-        redirect_to department_shift_path(params[:department_id], params[:id])
-    end
     private
 
     def shift_params
@@ -103,4 +70,44 @@ class ShiftsController < ApplicationController
         me == other
     end
 
+    def manage_ot
+        employee_ids = params[:employee_ids]
+        @amount = params[:amount]
+        if params[:manage_ot] == "Increase"
+            # employee_ids.each do |employee_id|
+            #     employee = Employee.find(employee_id)
+            #     employee.shifts.find(@id).update
+            @shift.overtime += @amount.to_f
+        elsif params[:manage_ot] == "Decrease"
+            @shift.overtime -= @amount.to_f
+        end
+        @shift.update(:overtime=>@shift.overtime)
+        @shift.employees.each do |employee|
+            employee.save
+        end
+    end
+
+    def assign_employee
+        assign_key = eval(params.to_s).invert["Assign"].sub(/assign_/,"").to_i
+        employee_id = params["employee_id_#{assign_key}".to_sym]
+        employee = Employee.find(employee_id)
+        unless @shift.employees.include?(employee)
+            @shift.employees.append(employee)
+            employee.save
+        end
+    end
+
+    def remove_employee
+        remove_key = eval(params.to_s).invert["Remove"].sub(/remove_/,"").to_i
+        employee_id = params["cur_employee_id_#{remove_key}".to_sym]
+        employee = Employee.find(employee_id)
+        employees = Array.new
+        @shift.employees.each do |target|
+            if target.id != employee.id
+                employees.append(target)
+            end
+        end
+        @shift.employees = employees
+        @shift.save
+    end
 end
