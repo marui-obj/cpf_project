@@ -32,15 +32,15 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <% @shift.employees.each_with_index do |employee|%>
+                            <% @shift.workplans.each_with_index do |work, index|%>
                                 <tr>
-                                    <%= text_field_tag "cur_employee_id_#{index+1}".to_sym, employee.id, type: "hidden" %>
+                                    <%= text_field_tag "cur_employee_id_#{index+1}".to_sym, work.employee_id, type: "hidden" %>
                                     <%# <td><input type="checkbox"></td> %>
-                                    <td><%= check_box_tag 'employee_ids[]', employee.id %></td>
-                                    <td><%= employee.name %></td>
-                                    <td><%= @shift.check_in.strftime('%t%H:%M') %></td>
-                                    <td><%= @shift.check_out.strftime('%t%H:%M') %></td>
-                                    <td><%= @shift.overtime %></td>
+                                    <td><%= check_box_tag 'employee_ids[]', work.employee_id %></td>
+                                    <td><%= Employee.find(work.employee_id).name %></td>
+                                    <td><%= work.check_in.strftime('%t%H:%M') %></td>
+                                    <td><%= work.check_out.strftime('%t%H:%M') %></td>
+                                    <td><%= work.overtime %></td>
                                     <td><%= submit_tag "Remove", name: "remove_#{index+1}", :class => 'button' %></td>
                                 </tr>
                             <% end %>
@@ -60,7 +60,7 @@
                         <tbody>
                             <% @employee_info.each_with_index do |employee, index| %>
                                 <tr>
-                                    <%= text_field_tag "employee_id_#{employee.id}".to_sym, employee[:id], type: "hidden" %>
+                                    <%= text_field_tag "employee_id_#{employee[:id]}".to_sym, employee[:id], type: "hidden" %>
                                     <td><%= employee[:name] %></td>
                                     <td><%= employee[:status] %></td>
                                     <td><%= employee[:worktime] %></td>

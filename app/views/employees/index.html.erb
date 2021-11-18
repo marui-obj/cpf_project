@@ -15,13 +15,13 @@
     <h1 class="text-center mt-3 text">Today Shift: <%= @employee.department.title %></span></h1>
     <div class="row justify-content-center">
       <div class="card-group">
-        <% @employee.shifts.each do |shift| %>
+        <% @employee.workplans.each do |work| %>
           <div class = "card border border-dark">
-            <h2 class="card-header">Shift ID: <%= shift.id %></h2>
+            <h2 class="card-header">Shift ID: <%= work.shift_id %></h2>
             <div class="card-body">
-              <h4 class="card-text">Entry time: <%= shift.check_in.strftime('%t%H:%M') %></h4>
-              <h4 class="card-text">Exit time: <%= shift.check_out.strftime('%t%H:%M') %></h4>
-              <h4 class="card-text">Overtime: <%= shift.overtime %></h4>
+              <h4 class="card-text">Entry time: <%= work.check_in.strftime('%t%H:%M') %></h4>
+              <h4 class="card-text">Exit time: <%= work.check_out.strftime('%t%H:%M') %></h4>
+              <h4 class="card-text">Overtime: <%= work.overtime %></h4>
             </div>
             <div class="card-footer bg-transparent border-dark d-flex justify-content-around">
               <button>Check in</button>

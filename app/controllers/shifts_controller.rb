@@ -15,10 +15,10 @@ class ShiftsController < ApplicationController
             @temp_employee_info = Hash.new
             @temp_employee_info[:id] = employee.id
             @temp_employee_info[:name] = employee.name
-            unless employee.shifts.size == 0
-                employee.shifts.each do |shift|
+            unless employee.workplans.size == 0
+                employee.workplans.each do |work|
                     # Check Employee Status
-                    if overlap?(shift, @shift)
+                    if overlap?(work, @shift)
                         @temp_employee_info[:status] = 'Occupied'
                     else
                         if @temp_employee_info[:status] == '' or @temp_employee_info[:status].nil?
@@ -27,8 +27,8 @@ class ShiftsController < ApplicationController
                     end
                                 
                     # Calculate Employee Worktime
-                    if same_date?(shift, @shift)
-                        @shift_worktime = (shift.check_out - shift.check_in)/3600
+                    if same_date?(work, @shift)
+                        @shift_worktime = (work.check_out - work.check_in)/3600
                         @temp_worktime += @shift_worktime
                     end
                 end
@@ -72,28 +72,34 @@ class ShiftsController < ApplicationController
 
     def manage_ot
         employee_ids = params[:employee_ids]
-        @amount = params[:amount]
-        if params[:manage_ot] == "Increase"
-            # employee_ids.each do |employee_id|
-            #     employee = Employee.find(employee_id)
-            #     employee.shifts.find(@id).update
-            @shift.overtime += @amount.to_f
-        elsif params[:manage_ot] == "Decrease"
-            @shift.overtime -= @amount.to_f
-        end
-        @shift.update(:overtime=>@shift.overtime)
-        @shift.employees.each do |employee|
-            employee.save
+        amount = params[:amount]
+        begin
+            employee_ids.each do |employee_id|
+                employee = Employee.find(employee_id)
+                work = employee.workplans.find_by(:shift_id=>@id)
+                if params[:manage_ot] == "Increase"
+                    work.overtime += amount.to_f
+                elsif params[:manage_ot] == "Decrease"
+                    work.overtime -= amount.to_f
+                    if work.overtime.negative?
+                        work.overtime = 0
+                    end
+                end
+                work.save
+            end
+        rescue
         end
     end
 
     def assign_employee
         assign_key = eval(params.to_s).invert["Assign"].sub(/assign_/,"").to_i
         employee_id = params["employee_id_#{assign_key}".to_sym]
-        employee = Employee.find(employee_id)
-        unless @shift.employees.include?(employee)
-            @shift.employees.append(employee)
-            employee.save
+        if @shift.workplans.find_by(:employee_id=>employee_id).nil?
+            new_work = Workplan.new(:check_in=>@shift.check_in, :check_out=>@shift.check_out,:overtime=>0)
+            new_work.shift = @shift
+            employee = Employee.find(employee_id)
+            new_work.employee = employee
+            new_work.save
         end
     end
 
@@ -101,13 +107,7 @@ class ShiftsController < ApplicationController
         remove_key = eval(params.to_s).invert["Remove"].sub(/remove_/,"").to_i
         employee_id = params["cur_employee_id_#{remove_key}".to_sym]
         employee = Employee.find(employee_id)
-        employees = Array.new
-        @shift.employees.each do |target|
-            if target.id != employee.id
-                employees.append(target)
-            end
-        end
-        @shift.employees = employees
-        @shift.save
+        work = @shift.workplans.find_by(:employee_id=>employee_id)
+        work.destroy
     end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_13_171942) do
+ActiveRecord::Schema.define(version: 2021_11_18_164033) do
 
   create_table "departments", force: :cascade do |t|
     t.string "title"
@@ -29,13 +29,6 @@ ActiveRecord::Schema.define(version: 2021_11_13_171942) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["department_id"], name: "index_employees_on_department_id"
     t.index ["user_id"], name: "index_employees_on_user_id"
-  end
-
-  create_table "employees_shifts", id: false, force: :cascade do |t|
-    t.integer "employee_id", null: false
-    t.integer "shift_id", null: false
-    t.index ["employee_id", "shift_id"], name: "index_employees_shifts_on_employee_id_and_shift_id"
-    t.index ["shift_id", "employee_id"], name: "index_employees_shifts_on_shift_id_and_employee_id"
   end
 
   create_table "managers", force: :cascade do |t|
@@ -63,6 +56,18 @@ ActiveRecord::Schema.define(version: 2021_11_13_171942) do
     t.string "password_digest"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "workplans", force: :cascade do |t|
+    t.datetime "check_in"
+    t.datetime "check_out"
+    t.integer "overtime"
+    t.integer "shift_id"
+    t.integer "employee_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["employee_id"], name: "index_workplans_on_employee_id"
+    t.index ["shift_id"], name: "index_workplans_on_shift_id"
   end
 
 end

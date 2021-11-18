@@ -53,15 +53,42 @@ yee3.save
 # Create Shift
 ka1 = Shift.new(:check_in=>"15-11-2021 00:00", :check_out=>"15-11-2021 8:00", :overtime=>1)
 ka1.department = pluck
-ka1.employees = [yee1]
 ka1.save
 
 ka2 = Shift.new(:check_in=>"15-11-2021 8:00", :check_out=>"15-11-2021 16:00", :overtime=>2)
 ka2.department = pluck
-ka2.employees = [yee1, yee2]
 ka2.save
 
 ka3 = Shift.new(:check_in=>"15-11-2021 16:00", :check_out=>"16-11-2021 00:00", :overtime=>3)
 ka3.department = pluck
-ka3.employees = [yee1, yee2, yee3]
 ka3.save
+
+w1 = Workplan.new(:check_in=>ka1.check_in, :check_out=>ka1.check_out, :overtime=>1)
+w1.shift = ka1
+w1.employee = yee1
+w1.save
+
+w2 = Workplan.new(:check_in=>ka2.check_in, :check_out=>ka2.check_out, :overtime=>2)
+w2.shift = ka2
+w2.employee = yee1
+w2.save
+
+w3 = Workplan.new(:check_in=>ka2.check_in, :check_out=>ka2.check_out, :overtime=>2)
+w3.shift = ka2
+w3.employee = yee2
+w3.save
+
+w4 = Workplan.new(:check_in=>ka3.check_in, :check_out=>ka3.check_out, :overtime=>3)
+w4.shift = ka3
+w4.employee = yee1
+w4.save
+
+w5 = Workplan.new(:check_in=>ka3.check_in, :check_out=>ka3.check_out, :overtime=>3)
+w5.shift = ka3
+w5.employee = yee2
+w5.save
+
+w6 = Workplan.new(:check_in=>ka3.check_in, :check_out=>ka3.check_out, :overtime=>3)
+w6.shift = ka3
+w6.employee = yee3
+w6.save
