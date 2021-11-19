@@ -1,4 +1,5 @@
 class ShiftsController < ApplicationController
+    @@status = "plan"
 
     def new
         @shift = Shift.new
@@ -10,6 +11,7 @@ class ShiftsController < ApplicationController
         @employee_info = Array.new
         @employee_status = Array.new
         @employee_worktime = Array.new
+        @status == @@status
         @shift.department.employees.each do |employee|
             @temp_worktime = 0
             @temp_employee_info = Hash.new
@@ -28,7 +30,7 @@ class ShiftsController < ApplicationController
                                 
                     # Calculate Employee Worktime
                     if same_date?(work, @shift)
-                        @shift_worktime = (work.check_out - work.check_in)/3600
+                        @shift_worktime = (work.check_out - work.check_in).abs/3600
                         @temp_worktime += @shift_worktime
                     end
                 end
@@ -51,9 +53,27 @@ class ShiftsController < ApplicationController
             assign_employee
         elsif params.value?("Remove")
             remove_employee
+        elsif params.key?("status")
+            change
         end
-        redirect_to department_shift_path(@department_id, @id)
+        redirect_to department_shift_path
     end
+
+    def status
+        @@status
+    end
+
+    helper_method :status
+
+    # def plan
+    #     show
+    #     @status = "plan"
+    # end
+
+    # def actual
+    #     show
+    #     @status = "actual"
+    # end
 
     private
 
@@ -95,7 +115,7 @@ class ShiftsController < ApplicationController
         assign_key = eval(params.to_s).invert["Assign"].sub(/assign_/,"").to_i
         employee_id = params["employee_id_#{assign_key}".to_sym]
         if @shift.workplans.find_by(:employee_id=>employee_id).nil?
-            new_work = Workplan.new(:check_in=>@shift.check_in, :check_out=>@shift.check_out,:overtime=>0)
+            new_work = Workplan.new(:date=>@shift.date, :check_in=>@shift.check_in, :check_out=>@shift.check_out,:overtime=>0)
             new_work.shift = @shift
             employee = Employee.find(employee_id)
             new_work.employee = employee
@@ -109,5 +129,9 @@ class ShiftsController < ApplicationController
         employee = Employee.find(employee_id)
         work = @shift.workplans.find_by(:employee_id=>employee_id)
         work.destroy
+    end
+
+    def change
+        @@status = params[:status].downcase
     end
 end

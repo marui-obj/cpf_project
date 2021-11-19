@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_18_164033) do
+ActiveRecord::Schema.define(version: 2021_11_19_172036) do
 
   create_table "departments", force: :cascade do |t|
     t.string "title"
@@ -41,6 +41,7 @@ ActiveRecord::Schema.define(version: 2021_11_18_164033) do
   end
 
   create_table "shifts", force: :cascade do |t|
+    t.date "date"
     t.datetime "check_in"
     t.datetime "check_out"
     t.integer "overtime"
@@ -58,7 +59,21 @@ ActiveRecord::Schema.define(version: 2021_11_18_164033) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "workactuals", force: :cascade do |t|
+    t.date "date"
+    t.datetime "check_in"
+    t.datetime "check_out"
+    t.integer "overtime"
+    t.integer "shift_id"
+    t.integer "employee_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["employee_id"], name: "index_workactuals_on_employee_id"
+    t.index ["shift_id"], name: "index_workactuals_on_shift_id"
+  end
+
   create_table "workplans", force: :cascade do |t|
+    t.date "date"
     t.datetime "check_in"
     t.datetime "check_out"
     t.integer "overtime"

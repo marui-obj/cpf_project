@@ -11,11 +11,12 @@
             <div class="my-4 d-flex justify-content-between">
                 <h3>
                     <%= @shift.department.title %> 
-                    <%= @shift.check_in.to_date.strftime('%d-%_m-%Y')%>
+                    <%= @shift.date.strftime('%d/%m/%Y') %>
+                    <%= status %>
                 </h3>
                 <div class="align-self-center">
-                    <%= link_to '<button>Plan</button>'.html_safe%>
-                    <%= link_to '<button>Actual</button>'.html_safe%>
+                    <%= submit_tag 'Plan', name: :status %>
+                    <%= submit_tag 'Actual', name: :status %>
                 </div>
             </div>
             <div class="row">
@@ -32,17 +33,42 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <% @shift.workplans.each_with_index do |work, index|%>
-                                <tr>
-                                    <%= text_field_tag "cur_employee_id_#{index+1}".to_sym, work.employee_id, type: "hidden" %>
-                                    <%# <td><input type="checkbox"></td> %>
-                                    <td><%= check_box_tag 'employee_ids[]', work.employee_id %></td>
-                                    <td><%= Employee.find(work.employee_id).name %></td>
-                                    <td><%= work.check_in.strftime('%t%H:%M') %></td>
-                                    <td><%= work.check_out.strftime('%t%H:%M') %></td>
-                                    <td><%= work.overtime %></td>
-                                    <td><%= submit_tag "Remove", name: "remove_#{index+1}", :class => 'button' %></td>
-                                </tr>
+                            <% if status == "plan" %>
+                                <% @shift.workplans.each_with_index do |work, index|%>
+                                    <tr>
+                                        <%= text_field_tag "cur_employee_id_#{index+1}".to_sym, work.employee_id, type: "hidden" %>
+                                        <td><%= check_box_tag 'employee_ids[]', work.employee_id %></td>
+                                        <td><%= Employee.find(work.employee_id).name %></td>
+                                        <td><%= work.check_in.strftime('%t%H:%M') %></td>
+                                        <td><%= work.check_out.strftime('%t%H:%M') %></td>
+                                        <td><%= work.overtime %></td>
+                                        <td><%= submit_tag "Remove", name: "remove_#{index+1}", :class => 'button' %></td>
+                                    </tr>
+                                <% end %>
+                            <% else %>
+                                <% @shift.workactuals.each_with_index do |work, index|%>
+                                    <tr>
+                                        <%= text_field_tag "cur_employee_id_#{index+1}".to_sym, work.employee_id, type: "hidden" %>
+                                        <td><%= check_box_tag 'employee_ids[]', work.employee_id %></td>
+                                        <td><%= Employee.find(work.employee_id).name %></td>
+                                        <% unless work.check_in.nil? %>
+                                            <td><%= work.check_in.strftime('%t%H:%M') %></td>
+                                        <% else %>
+                                            <td>N/A</td>
+                                        <% end %>
+                                        <% unless work.check_out.nil? %>
+                                            <td><%= work.check_out.strftime('%t%H:%M') %></td>
+                                        <% else %>
+                                            <td>N/A</td>
+                                        <% end %>
+                                        <% unless work.overtime.nil? %>
+                                            <td><%= work.overtime %></td>
+                                        <% else %>
+                                            <td>N/A</td>
+                                        <% end %>
+                                        <td><%= submit_tag "Remove", name: "remove_#{index+1}", :class => 'button' %></td>
+                                    </tr>
+                                <% end %>
                             <% end %>
                         </tbody>
                     </table>
@@ -73,7 +99,7 @@
                         <div class="card mx-0 my-1 w-50">
                             <h5 class="card-header">Manage OT</h5>
                             <div class="card-body mx-auto">
-                                <%= text_field_tag :amount %>
+                                <%= number_field_tag :amount, 0, within: 0..10 %>
                                 <div class="mt-3 d-flex justify-content-around">
                                     <%= submit_tag 'Increase', name: 'manage_ot', :class => 'button' %>
                                     <%= submit_tag 'Decrease', name: 'manage_ot', :class => 'button' %>
