@@ -1,4 +1,5 @@
 class Shift < ActiveRecord::Base
     belongs_to :department
-    has_and_belongs_to_many :employees
+    has_many :workplans
+    has_many :employees, :through => :workplans
 end

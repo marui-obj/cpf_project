@@ -1,19 +1,17 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 </head>
 <body>
-    <div class="show">
-        <div class="top">
-            <%= @department.title %>
-            <a id="date"></a>
-            <button class="remove-shift">Remove Shift</button>
-            <button class="add-shift">Add Shift</button>
-        </div>
-            <table>
+    <div class="container w-auto">
+        <h3 class="my-4"><%= @department.title %> <span id='date'></span></h3>
+        <div class="row">
+            <table class="table table-striped table-bordered text-center">
                 <thead>
                     <tr>
-                        <th><input type="checkbox" id="select-all">Select All</th>
                         <th>Entry Time</th>
                         <th>Exit Time</th>
                         <th>Shift hours</th>
@@ -24,16 +22,16 @@
                 <tbody>
                     <% @department.shifts.each do |shift| %>
                         <tr>
-                            <td><input type="checkbox"></td>
                             <td><%= shift.check_in.strftime('%d-%_m-%Y%t%H:%M') %></td>
                             <td><%= shift.check_out.strftime('%d-%_m-%Y%t%H:%M') %></td>
                             <td><%= (shift.check_out - shift.check_in)/3600 %></td>
-                            <td><%= shift.employees.size %></td>
+                            <td><%= shift.workplans.size %></td>
                             <td><%= link_to 'More info', department_shift_path(@department.id, shift.id) %></td>
                         </tr>
                     <% end %>
                 </tbody>
-            </table>
+                </table>
         </div>
+    </div>
 </body>
 </html>

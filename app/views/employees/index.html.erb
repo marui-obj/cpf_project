@@ -1,5 +1,36 @@
-<h1>Welcome employees :D <%= @employee.name %></h1>
-<h1>Your shift today is</h1>
-  <% @employee.shifts.each do |shift| %>
-    <%= render shift %>
+<!DOCTYPE html>
+<html>
+<head>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+</head>
+<body>
+  <% flash.each do |type, msg| %>
+    <div class="alert alert-success" role="alert">
+      <%= msg %>
+    </div>
   <% end %>
+  <div class="container w-75">
+    <h1 class="text-center mt-3 text">Today Shift: <%= @employee.department.title %></span></h1>
+    <div class="row justify-content-center">
+      <div class="card-group">
+        <% @employee.workplans.each do |work| %>
+          <div class = "card border border-dark">
+            <h2 class="card-header">Shift ID: <%= work.shift_id %></h2>
+            <div class="card-body">
+              <h4 class="card-text">Entry time: <%= work.check_in.strftime('%t%H:%M') %></h4>
+              <h4 class="card-text">Exit time: <%= work.check_out.strftime('%t%H:%M') %></h4>
+              <h4 class="card-text">Overtime: <%= work.overtime %></h4>
+            </div>
+            <div class="card-footer bg-transparent border-dark d-flex justify-content-around">
+              <button>Check in</button>
+              <button>Check out</button>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
