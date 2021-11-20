@@ -10,6 +10,7 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
   </head>
+  <body>
     <nav class="navbar navbar-light bg-light">
       <div class="navbar-brand">
         <%= image_tag "CPF.png", height: 50 %>
@@ -25,8 +26,7 @@
           <%= link_to '<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Logout</button>'.html_safe, '/logout', method: :delete %>
         </div>
       <% end %>
-  </nav>
-  <body>
+    </nav>
     <%= yield %>
     <%= javascript_pack_tag 'date' %>
     <%= javascript_pack_tag 'select' %>

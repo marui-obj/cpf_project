@@ -44,7 +44,7 @@ ActiveRecord::Schema.define(version: 2021_11_19_172036) do
     t.date "date"
     t.datetime "check_in"
     t.datetime "check_out"
-    t.integer "overtime"
+    t.float "overtime"
     t.integer "department_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -63,7 +63,7 @@ ActiveRecord::Schema.define(version: 2021_11_19_172036) do
     t.date "date"
     t.datetime "check_in"
     t.datetime "check_out"
-    t.integer "overtime"
+    t.float "overtime"
     t.integer "shift_id"
     t.integer "employee_id"
     t.datetime "created_at", precision: 6, null: false
@@ -76,7 +76,7 @@ ActiveRecord::Schema.define(version: 2021_11_19_172036) do
     t.date "date"
     t.datetime "check_in"
     t.datetime "check_out"
-    t.integer "overtime"
+    t.float "overtime"
     t.integer "shift_id"
     t.integer "employee_id"
     t.datetime "created_at", precision: 6, null: false

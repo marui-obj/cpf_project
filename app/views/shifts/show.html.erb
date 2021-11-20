@@ -39,8 +39,8 @@
                                         <%= text_field_tag "cur_employee_id_#{index+1}".to_sym, work.employee_id, type: "hidden" %>
                                         <td><%= check_box_tag 'employee_ids[]', work.employee_id %></td>
                                         <td><%= Employee.find(work.employee_id).name %></td>
-                                        <td><%= work.check_in.strftime('%t%H:%M') %></td>
-                                        <td><%= work.check_out.strftime('%t%H:%M') %></td>
+                                        <td><%= work.check_in.localtime.strftime('%t%H:%M') %></td>
+                                        <td><%= work.check_out.localtime.strftime('%t%H:%M') %></td>
                                         <td><%= work.overtime %></td>
                                         <td><%= submit_tag "Remove", name: "remove_#{index+1}", :class => 'button' %></td>
                                     </tr>
@@ -52,17 +52,17 @@
                                         <td><%= check_box_tag 'employee_ids[]', work.employee_id %></td>
                                         <td><%= Employee.find(work.employee_id).name %></td>
                                         <% unless work.check_in.nil? %>
-                                            <td><%= work.check_in.strftime('%t%H:%M') %></td>
+                                            <td><%= work.check_in.localtime.strftime('%t%H:%M') %></td>
                                         <% else %>
                                             <td>N/A</td>
                                         <% end %>
                                         <% unless work.check_out.nil? %>
-                                            <td><%= work.check_out.strftime('%t%H:%M') %></td>
+                                            <td><%= work.check_out.localtime.strftime('%t%H:%M') %></td>
                                         <% else %>
                                             <td>N/A</td>
                                         <% end %>
                                         <% unless work.overtime.nil? %>
-                                            <td><%= work.overtime %></td>
+                                            <td><%= "%.2f" % work.overtime %></td>
                                         <% else %>
                                             <td>N/A</td>
                                         <% end %>
@@ -89,7 +89,7 @@
                                     <%= text_field_tag "employee_id_#{employee[:id]}".to_sym, employee[:id], type: "hidden" %>
                                     <td><%= employee[:name] %></td>
                                     <td><%= employee[:status] %></td>
-                                    <td><%= employee[:worktime] %></td>
+                                    <td><%= "%.2f" % employee[:worktime] %></td>
                                     <td><%= submit_tag "Assign", name: "assign_#{index+1}", :class => 'button' %></td>
                                 </tr>
                             <% end %>

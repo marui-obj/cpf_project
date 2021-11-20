@@ -22,9 +22,9 @@
                 <tbody>
                     <% @department.shifts.each do |shift| %>
                         <tr>
-                            <td><%= shift.check_in.strftime('%t%H:%M') %></td>
-                            <td><%= shift.check_out.strftime('%t%H:%M') %></td>
-                            <td><%= (shift.check_out - shift.check_in)/3600 %></td>
+                            <td><%= shift.check_in.localtime.strftime('%t%H:%M') %></td>
+                            <td><%= shift.check_out.localtime.strftime('%t%H:%M') %></td>
+                            <td><%= "%.2f" % [(shift.check_out - shift.check_in)/3600.0] %></td>
                             <td><%= shift.workplans.size %></td>
                             <td><%= link_to 'More info', department_shift_path(@department.id, shift.id) %></td>
                         </tr>

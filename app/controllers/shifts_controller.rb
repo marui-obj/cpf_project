@@ -18,19 +18,27 @@ class ShiftsController < ApplicationController
             @temp_employee_info[:id] = employee.id
             @temp_employee_info[:name] = employee.name
             unless employee.workplans.size == 0
-                employee.workplans.each do |work|
+                employee.workplans.each do |workplan|
                     # Check Employee Status
-                    if overlap?(work, @shift)
+                    if overlap?(workplan, @shift)
                         @temp_employee_info[:status] = 'Occupied'
                     else
                         if @temp_employee_info[:status] == '' or @temp_employee_info[:status].nil?
                             @temp_employee_info[:status] = 'Free'
                         end
                     end
-                                
+                end
+
+                employee.workactuals.each do |workactual|
                     # Calculate Employee Worktime
-                    if same_date?(work, @shift)
-                        @shift_worktime = (work.check_out - work.check_in).abs/3600
+                    puts workactual.check_out
+                    if workactual.check_out.nil?
+                        unless workactual.check_in.nil?
+                            now = DateTime.now
+                            @shift_worktime = (now - workactual.check_in.localtime).abs/3600.0
+                        end
+                    else same_date?(workactual, @shift)
+                        @shift_worktime = (workactual.check_out. - workactual.check_in).abs/3600.0
                         @temp_worktime += @shift_worktime
                     end
                 end

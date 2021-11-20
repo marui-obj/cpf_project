@@ -4,7 +4,7 @@ class CreateShifts < ActiveRecord::Migration[6.1]
       t.date :date
       t.datetime :check_in
       t.datetime :check_out
-      t.integer :overtime
+      t.float :overtime
       t.references :department
 
       t.timestamps
