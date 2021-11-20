@@ -11,30 +11,32 @@
       <%= msg %>
     </div>
   <% end %>
-  <div class="container w-75">
-    <h1 class="text-center mt-3 text">Today Shift: <%= @employee.department.title %></span></h1>
-    <div class="row justify-content-center">
-      <div class="card-group">
-        <%= form_tag employees_path, :method => :put do %>
-          <% @employee.workplans.each do |work| %>
-            <% if today?(work.date) %>
-              <div class = "card border border-dark">
-                <h2 class="card-header">Shift ID: <%= work.shift_id %></h2>
-                <div class="card-body">
-                  <h4 class="card-text">Entry time: <%= work.check_in.localtime.strftime('%t%H:%M') %></h4>
-                  <h4 class="card-text">Exit time: <%= work.check_out.localtime.strftime('%t%H:%M') %></h4>
-                  <h4 class="card-text">Overtime: <%= work.overtime %></h4>
+  <%= form_tag employees_path, :method => :put do %>
+    <div class="container w-75">
+      <h1 class="text-center mt-3 text">Today Shift: <%= @employee.department.title %></span></h1>
+      <div class="row justify-content-center">
+        <div class="card-group">
+          <%# form_tag employees_path, :method => :put do %>
+            <% @employee.workplans.each do |work| %>
+              <% if today?(work.date) %>
+                <div class = "card border border-dark">
+                  <h2 class="card-header">Shift ID: <%= work.shift_id %></h2>
+                  <div class="card-body">
+                    <h4 class="card-text">Entry time: <%= work.check_in.localtime.strftime('%t%H:%M') %></h4>
+                    <h4 class="card-text">Exit time: <%= work.check_out.localtime.strftime('%t%H:%M') %></h4>
+                    <h4 class="card-text">Overtime: <%= work.overtime %></h4>
+                  </div>
+                  <div class="card-footer bg-transparent border-dark d-flex justify-content-around">
+                    <%= submit_tag 'Check in', name: "check_in_#{work.id}" %>
+                    <%= submit_tag 'Check out', name: "check_out_#{work.id}" %>
+                  </div>
                 </div>
-                <div class="card-footer bg-transparent border-dark d-flex justify-content-around">
-                  <%= submit_tag 'Check in', name: "check_in_#{work.id}" %>
-                  <%= submit_tag 'Check out', name: "check_out_#{work.id}" %>
-                </div>
-              </div>
+              <% end %>
             <% end %>
-          <% end %>
-        <% end %>
+          <%# end %>
+        </div>
       </div>
     </div>
-  </div>
+  <% end %>
 </body>
 </html>

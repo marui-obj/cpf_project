@@ -29,21 +29,21 @@ store.manager = boss
 store.save
 
 #Create Employee
-user2 = User.create!(:username=>"yee1", :password_digest=>BCrypt::Password.create("password"))
+user2 = User.create!(:username=>"employee1", :password_digest=>BCrypt::Password.create("password"))
 user2.save
 yee1 = Employee.new(:name=>"Thanadon Watcharawilairat")
 yee1.user = user2
 yee1.department = pluck
 yee1.save
 
-user3 = User.create!(:username=>"yee2", :password_digest=>BCrypt::Password.create("password"))
+user3 = User.create!(:username=>"employee2", :password_digest=>BCrypt::Password.create("password"))
 user3.save
 yee2 = Employee.new(:name=>"Purin Petch-in")
 yee2.user = user3
 yee2.department = pluck
 yee2.save
 
-user4 = User.create!(:username=>"yee3", :password_digest=>BCrypt::Password.create("password"))
+user4 = User.create!(:username=>"employee3", :password_digest=>BCrypt::Password.create("password"))
 user4.save
 yee3 = Employee.new(:name=>"Phasit Sangklub")
 yee3.user = user4
