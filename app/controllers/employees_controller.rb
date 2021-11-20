@@ -53,7 +53,7 @@ class EmployeesController < ApplicationController
             if check_in_range > @@min_time
                 flash[:notice] = "You can't check in due to late for work."
             elsif check_in_range < -@@min_time
-                flash[:notice] = "You can check in 3 hours before this work check in time."
+                flash[:notice] = "You can check in #{@@min_time} hours before this work check in time."
             else
                 @work.update(:check_in=>now)
                 flash[:notice] = "You checked in at #{now.strftime('%t%H:%M')}"
@@ -72,14 +72,14 @@ class EmployeesController < ApplicationController
                 workplan = Workplan.find(work_id)
                 check_out_range = ((now - (workplan.check_out))/3600)
                 if check_out_range < -@@min_time
-                    flash[:notice] = "You can check out 3 hours before this work check out time."
+                    flash[:notice] = "You can check out #{@@min_time} hours before this work check out time."
                 else
                     check_out_ot_range = ((now - (workplan.check_out + workplan.overtime.hours).to_time)/3600)
                     if check_out_ot_range > @@min_time
                         check_out_time = workplan.check_out+(workplan.overtime+@@min_time).hours
                         @work.update(:check_out=>check_out_time)
                         calculate_ot
-                        flash[:notice] = "You can't check out atfer 3 hours of planned check out time. Your check out time will be #{(check_out_time.localtime.strftime('%t%H:%M'))}"
+                        flash[:notice] = "You can't check out atfer #{@@min_time} hours of planned check out time. Your check out time will be #{(check_out_time.localtime.strftime('%t%H:%M'))}"
                     else
                         @work.update(:check_out=>now)
                         calculate_ot

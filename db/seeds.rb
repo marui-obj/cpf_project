@@ -51,7 +51,7 @@ yee3.department = pluck
 yee3.save
 
 # Create Shift
-ka1 = Shift.new(:date=>"20-11-2021", :check_in=>"20-11-2021 0:00 +7", :check_out=>"20-11-2021 8:00 +7", :overtime=>0)
+ka1 = Shift.new(:date=>"20-11-2021", :check_in=>"20-11-2021 0:00 +7", :check_out=>"20-11-2021 8:00 +7", :overtime=>1)
 ka1.department = pluck
 ka1.save
 
