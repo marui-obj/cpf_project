@@ -51,7 +51,7 @@ yee3.department = pluck
 yee3.save
 
 # Create Shift
-ka1 = Shift.new(:date=>"20-11-2021", :check_in=>"20-11-2021 00:00 +7", :check_out=>"20-11-2021 8:00 +7", :overtime=>1)
+ka1 = Shift.new(:date=>"20-11-2021", :check_in=>"20-11-2021 0:00 +7", :check_out=>"20-11-2021 8:00 +7", :overtime=>0)
 ka1.department = pluck
 ka1.save
 
@@ -59,11 +59,11 @@ ka2 = Shift.new(:date=>"20-11-2021", :check_in=>"20-11-2021 8:00 +7", :check_out
 ka2.department = pluck
 ka2.save
 
-ka3 = Shift.new(:date=>"20-11-2021", :check_in=>"20-11-2021 16:00 +7", :check_out=>"21-11-2021 00:00 +7", :overtime=>3)
+ka3 = Shift.new(:date=>"20-11-2021", :check_in=>"21-11-2021 16:00 +7", :check_out=>"21-11-2021 0:00 +7", :overtime=>3)
 ka3.department = pluck
 ka3.save
 
-wp1 = Workplan.new(:date=>ka1.date, :check_in=>ka1.check_in, :check_out=>ka1.check_out, :overtime=>1)
+wp1 = Workplan.new(:date=>ka1.date, :check_in=>ka1.check_in, :check_out=>ka1.check_out, :overtime=>0)
 wp1.shift = ka1
 wp1.employee = yee1
 wp1.save
