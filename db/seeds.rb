@@ -59,7 +59,7 @@ ka2 = Shift.new(:date=>"20-11-2021", :check_in=>"20-11-2021 8:00 +7", :check_out
 ka2.department = pluck
 ka2.save
 
-ka3 = Shift.new(:date=>"20-11-2021", :check_in=>"21-11-2021 16:00 +7", :check_out=>"21-11-2021 0:00 +7", :overtime=>3)
+ka3 = Shift.new(:date=>"20-11-2021", :check_in=>"20-11-2021 16:00 +7", :check_out=>"21-11-2021 0:00 +7", :overtime=>3)
 ka3.department = pluck
 ka3.save
 
