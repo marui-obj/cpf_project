@@ -6,26 +6,31 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 # Create Manager
-user1 = User.create!(:username=>"admin", :password_digest=> BCrypt::Password.create("password"))
-boss = Manager.new(:name=>"Thanakorn Boriboon")
-boss.user = user1
-boss.save
+user1 = User.create!(:username=>"manager1", :password_digest=> BCrypt::Password.create("password"))
+boss1 = Manager.new(:name=>"Thanakorn Boriboon")
+boss1.user = user1
+boss1.save
+
+user5 = User.create!(:username=>"manager2", :password_digest=> BCrypt::Password.create("password"))
+boss2 = Manager.new(:name=>"Nawin Aeimsamaung")
+boss2.user = user5
+boss2.save
 
 # Create Department
 pluck = Department.new(:title=>"งานถอนขนไก่")
-pluck.manager = boss
+pluck.manager = boss1
 pluck.save
 
 kill = Department.new(:title=>"งานเชือดไก่")
-kill.manager = boss
+kill.manager = boss1
 kill.save
 
 qc = Department.new(:title=>"งานไก่ตกราว")
-qc.manager = boss
+qc.manager = boss2
 qc.save
 
 store = Department.new(:title=>"งานจัดเก็บและจ่ายสินค้าแช่แข็ง")
-store.manager = boss
+store.manager = boss2
 store.save
 
 #Create Employee

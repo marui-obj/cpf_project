@@ -39,11 +39,8 @@ class DepartmentsController < ApplicationController
     end
 
     def your_department?
-        department_ids = Array.new
-        current_user.manager.departments.each do |department| 
-            department_ids.append(department.id)
-        end
-        if department_ids.any? params[:id]
+        department = Department.find(params[:id])
+        unless department.manager.user == current_user
             flash[:notice] = "This department doesn't belong to you."
             redirect_to departments_path
         end
