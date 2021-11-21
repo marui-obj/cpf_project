@@ -1,4 +1,6 @@
 class ShiftsController < ApplicationController
+    before_action :your_department?
+    include SessionsHelper
     @@status = "plan"
 
     def new
@@ -141,5 +143,16 @@ class ShiftsController < ApplicationController
 
     def change
         @@status = params[:status].downcase
+    end
+
+    def your_department?
+        department_ids = Array.new
+        current_user.manager.departments.each do |department| 
+            department_ids.append(department.id)
+        end
+        if department_ids.any? params[:department_id]
+            flash[:notice] = "This department doesn't belong to you."
+            redirect_to departments_path
+        end
     end
 end
