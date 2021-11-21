@@ -22,7 +22,7 @@
       </div>
       <% if logged_in? %>
         <div class="d-flex">
-          <a class="align-self-center mr-2"><i class="fa fa-user" aria-hidden="true"></i> <%= current_user.username %></a>
+          <a class="align-self-center mr-2"><i class="fa fa-user-circle-o" aria-hidden="true"></i> <%= current_user.username %></a>
           <%= link_to '<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Logout</button>'.html_safe, '/logout', method: :delete %>
         </div>
       <% end %>
