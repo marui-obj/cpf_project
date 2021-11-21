@@ -14,5 +14,9 @@ Rails.application.routes.draw do
   get '/logout', to: 'sessions#destroy'
   # put '/departments/:department_id/shifts/:id', to: 'shifts#update', as: :manage_ot
   # delete '/departments/:department_id/shifts/:id', to: 'shifts#destroy', as: :delete_department_shift
-
+  if Rails.env.test?
+    namespace :test do
+      resource :session, only: %i[create]
+    end
+  end
 end

@@ -31,6 +31,10 @@ gem 'bootsnap', '>= 1.4.4', require: false
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'rspec-rails', '~> 5.0.0'
+  gem 'rexml', '>= 3.2.5'
+  gem 'parallel_tests'
+  gem 'spring-commands-rspec'
 end
 
 group :development do
@@ -44,17 +48,35 @@ group :development do
   gem 'spring'
 end
 
+
 group :test do
+  gem 'simplecov',require: false
+  gem 'database_cleaner-active_record'
+
   # Adds support for Capybara system testing and selenium driver
-  gem 'capybara', '>= 3.26'
+  gem 'capybara', '>= 3.36'
+  gem 'nokogiri', '>= 1.12.5'
+  
+  gem 'zeitwerk', '>= 2.5.1'
+  gem 'rails-html-sanitizer', '>= 1.4.2'
+  gem 'matrix', '>= 0.4.2'
+  gem 'racc', '>= 1.6.0'
+
   gem 'selenium-webdriver'
   # Easy installation and use of web drivers to run system tests with browsers
   gem 'webdrivers'
-
   gem 'cucumber-rails', :require => false
   gem 'cucumber-rails-training-wheels'
   gem 'database_cleaner'
   gem 'launchy'
+end
+
+
+group :development, :test do
+    gem 'dotenv-rails'
+    gem 'factory_bot_rails'
+    # gem 'factory_bot'
+
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
