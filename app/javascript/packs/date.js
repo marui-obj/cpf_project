@@ -3,7 +3,7 @@ $(document).ready(function(){
     year = dt.getFullYear();
     month = dt.getMonth() + 1;
     day = dt.getDate();
-    document.getElementById('date').innerHTML=day + "/" + month + "/" + year;
+    // document.getElementById('date').innerHTML=day + "/" + month + "/" + year;
     $('#datepicker').datepicker()
     .on('changeDate', function(e) {
         var dateObject = $("#datepicker").datepicker("getDate");

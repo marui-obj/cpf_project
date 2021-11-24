@@ -20,7 +20,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <% @department.shifts.day_filter(Date.parse("25-11-2021")).each do |shift| %>
+                    <% @department.shifts.day_filter(Date.parse(@date_value)).each do |shift| %>
                         <tr>
                             <td><%= shift.check_in.localtime.strftime('%t%H:%M') %></td>
                             <td><%= shift.check_out.localtime.strftime('%t%H:%M') %></td>
