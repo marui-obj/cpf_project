@@ -5,7 +5,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<%# <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> %>
 </head>
 <body>
     <div class="container w-auto">
@@ -30,7 +30,8 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <% @department.shifts.day_filter(Date.parse("24-11-2021")).each do |shift| %>
+                    <%= @date_value %>
+                    <% @department.shifts.day_filter(@date_value).each do |shift| %>
                         <tr>
                             <td><%= shift.check_in.localtime.strftime('%t%H:%M') %></td>
                             <td><%= shift.check_out.localtime.strftime('%t%H:%M') %></td>

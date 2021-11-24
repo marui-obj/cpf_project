@@ -24,6 +24,7 @@ class DepartmentsController < ApplicationController
         id = params[:id]
         # begin
         @department = Department.find(id)
+        @date_value = Date.parse("25-11-2021");
 
         # rescue
         #     redirect_to departments_path

@@ -10,7 +10,7 @@ let text = ``;
 let dateArray = [];
 for (let i = 0; i < 8; i++) {
     dateArray.push((day+i) + "/" + month + "/" + year);
-    text += `<li><a class="dropdown-item" href="#" id = "${dateArray[i]}">${dateArray[i]}</a></li>`;
+    text += `<li><button class="dropdown-item" id = "${dateArray[i]}" value="${dateArray[i]}">${dateArray[i]}</button></li>`;
  
 }
 currentDate.innerHTML= dateArray[0];
@@ -21,15 +21,17 @@ $(function() {
     $('#datepicker').datepicker();
 });
 
-$('#date-select').on('change',function(){
-    $('#result').html($(this).val());   
-});
 
 for (let i = 0; i < 8; i++) {
     document.getElementById(dateArray[i]).onclick = function () {
         currentDate.innerHTML= dateArray[i];
     };
+
+   
 } 
 
+$("#22/11/2021").on('change',function(){
+    $('#result').html($(this).val());   
+});
 
 

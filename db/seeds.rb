@@ -52,80 +52,81 @@ user4 = User.create!(:username=>"employee3", :password_digest=>BCrypt::Password.
 user4.save
 yee3 = Employee.new(:name=>"Phasit Sangklub")
 yee3.user = user4
-yee3.department = pluck
+yee3.department = kill
 yee3.save
 
 # Create Shift
-for i in 2...5
-    ka1 = Shift.new(:date=>"#{20+i}-11-2021", :check_in=>"#{20+i}-11-2021 0:00 +7", :check_out=>"#{20+i}-11-2021 8:00 +7", :overtime=>1)
+(30).downto(25) do |i|
+    ka1 = Shift.new(:date=>"#{i}-11-2021", :check_in=>"#{i}-11-2021 0:00 +7", :check_out=>"#{i}-11-2021 8:00 +7", :overtime=>1)
     ka1.department = pluck
     ka1.save
 
-    ka2 = Shift.new(:date=>"#{20+i}-11-2021", :check_in=>"#{20+i}-11-2021 8:00 +7", :check_out=>"#{20+i}-11-2021 16:00 +7", :overtime=>2)
+    ka2 = Shift.new(:date=>"#{i}-11-2021", :check_in=>"#{i}-11-2021 8:00 +7", :check_out=>"#{i}-11-2021 16:00 +7", :overtime=>2)
     ka2.department = pluck
     ka2.save
 
-    ka3 = Shift.new(:date=>"#{20+i}-11-2021", :check_in=>"#{20+i}-11-2021 16:00 +7", :check_out=>"#{21+i}-11-2021 0:00 +7", :overtime=>3)
-    ka3.department = pluck
+    ka3 = Shift.new(:date=>"#{i}-11-2021", :check_in=>"#{i}-11-2021 16:00 +7", :check_out=>"#{i+1}-11-2021 0:00 +7", :overtime=>3)
+    ka3.department = kill
     ka3.save
+
+    wp1 = Workplan.new(:date=>ka1.date, :check_in=>ka1.check_in, :check_out=>ka1.check_out, :overtime=>0)
+    wp1.shift = ka1
+    wp1.employee = yee1
+    wp1.save
+
+    wa1 = Workactual.new(:date=>ka1.date)
+    wa1.shift = ka1
+    wa1.employee = yee1
+    wa1.save
+
+    wp2 = Workplan.new(:date=>ka2.date, :check_in=>ka2.check_in, :check_out=>ka2.check_out, :overtime=>2)
+    wp2.shift = ka2
+    wp2.employee = yee1
+    wp2.save
+
+    wa2 = Workactual.new(:date=>ka2.date)
+    wa2.shift = ka2
+    wa2.employee = yee1
+    wa2.save
+
+    wp3 = Workplan.new(:date=>ka2.date, :check_in=>ka2.check_in, :check_out=>ka2.check_out, :overtime=>2)
+    wp3.shift = ka2
+    wp3.employee = yee2
+    wp3.save
+
+    wa3 = Workactual.new(:date=>ka2.date)
+    wa3.shift = ka2
+    wa3.employee = yee2
+    wa3.save
+
+    wp4 = Workplan.new(:date=>ka3.date, :check_in=>ka3.check_in, :check_out=>ka3.check_out, :overtime=>3)
+    wp4.shift = ka3
+    wp4.employee = yee1
+    wp4.save
+
+    wa4 = Workactual.new(:date=>ka3.date)
+    wa4.shift = ka3
+    wa4.employee = yee1
+    wa4.save
+
+    wp5 = Workplan.new(:date=>ka3.date, :check_in=>ka3.check_in, :check_out=>ka3.check_out, :overtime=>3)
+    wp5.shift = ka3
+    wp5.employee = yee2
+    wp5.save
+
+    wa5 = Workactual.new(:date=>ka3.date)
+    wa5.shift = ka3
+    wa5.employee = yee2
+    wa5.save
+
+    wp6 = Workplan.new(:date=>ka3.date, :check_in=>ka3.check_in, :check_out=>ka3.check_out, :overtime=>3)
+    wp6.shift = ka3
+    wp6.employee = yee3
+    wp6.save
+
+    wa6 = Workactual.new(:date=>ka3.date)
+    wa6.shift = ka3
+    wa6.employee = yee3
+    wa6.save
 end
 
-wp1 = Workplan.new(:date=>ka1.date, :check_in=>ka1.check_in, :check_out=>ka1.check_out, :overtime=>0)
-wp1.shift = ka1
-wp1.employee = yee1
-wp1.save
-
-wa1 = Workactual.new(:date=>ka1.date)
-wa1.shift = ka1
-wa1.employee = yee1
-wa1.save
-
-wp2 = Workplan.new(:date=>ka2.date, :check_in=>ka2.check_in, :check_out=>ka2.check_out, :overtime=>2)
-wp2.shift = ka2
-wp2.employee = yee1
-wp2.save
-
-wa2 = Workactual.new(:date=>ka2.date)
-wa2.shift = ka2
-wa2.employee = yee1
-wa2.save
-
-wp3 = Workplan.new(:date=>ka2.date, :check_in=>ka2.check_in, :check_out=>ka2.check_out, :overtime=>2)
-wp3.shift = ka2
-wp3.employee = yee2
-wp3.save
-
-wa3 = Workactual.new(:date=>ka2.date)
-wa3.shift = ka2
-wa3.employee = yee2
-wa3.save
-
-wp4 = Workplan.new(:date=>ka3.date, :check_in=>ka3.check_in, :check_out=>ka3.check_out, :overtime=>3)
-wp4.shift = ka3
-wp4.employee = yee1
-wp4.save
-
-wa4 = Workactual.new(:date=>ka3.date)
-wa4.shift = ka3
-wa4.employee = yee1
-wa4.save
-
-wp5 = Workplan.new(:date=>ka3.date, :check_in=>ka3.check_in, :check_out=>ka3.check_out, :overtime=>3)
-wp5.shift = ka3
-wp5.employee = yee2
-wp5.save
-
-wa5 = Workactual.new(:date=>ka3.date)
-wa5.shift = ka3
-wa5.employee = yee2
-wa5.save
-
-wp6 = Workplan.new(:date=>ka3.date, :check_in=>ka3.check_in, :check_out=>ka3.check_out, :overtime=>3)
-wp6.shift = ka3
-wp6.employee = yee3
-wp6.save
-
-wa6 = Workactual.new(:date=>ka3.date)
-wa6.shift = ka3
-wa6.employee = yee3
-wa6.save
