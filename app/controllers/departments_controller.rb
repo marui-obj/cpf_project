@@ -1,6 +1,7 @@
 class DepartmentsController < ApplicationController
     before_action :authorize
     before_action :can_enter?
+    skip_before_action :verify_authenticity_token
     
 
     def new
@@ -8,16 +9,11 @@ class DepartmentsController < ApplicationController
     end
 
     def create
-        @department = Department.new(department_params)
-        if @department.save
-            continue
-        else
-            render :new
-        end
+        flash.notice = date_param;
+        redirect_to departments_path
     end
 
     def index
-        # flash.notice = params[:date]
         @departments = Department.all
     end
 
@@ -32,20 +28,15 @@ class DepartmentsController < ApplicationController
         # end
     end
 
-    def change_day
-        day = params[:date]
-        
-    end
+
 
 
     private
 
     def date_param
-        params[:date_param].blank?
+        params[:date]
     end
     
-    def department_params
-        params.require(:department).permit(:title, :manager)
-    end
+
     
 end

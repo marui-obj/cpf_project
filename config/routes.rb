@@ -15,7 +15,6 @@ Rails.application.routes.draw do
   put '/employees', to: 'employees#update'
 
   get '/departments', to: 'departments#index'
-  get '/departments/:date', to: 'department#change_day'
 
 
 end
