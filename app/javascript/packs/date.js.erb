@@ -1,0 +1,32 @@
+$(document).ready(function(){
+    var dt = new Date();
+    year = dt.getFullYear();
+    month = dt.getMonth() + 1;
+    day = dt.getDate();
+    document.getElementById('date').innerHTML=day + "/" + month + "/" + year;
+    $('#datepicker').datepicker()
+    .on('changeDate', function(e) {
+        var dateObject = $("#datepicker").datepicker("getDate");
+        var dateString = dateObject.getFullYear() + '-' + (dateObject.getMonth() + 1) + '-' + dateObject.getDate();
+        console.log(dateString);
+
+        $.ajax({
+            type: "GET",
+            url: "/departments/",
+            data :{
+                date: dateString
+            },
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            success: function(result) {
+                window.location.href = <%= %>
+              },
+            
+
+        });
+
+    });
+
+
+});

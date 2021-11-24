@@ -17,6 +17,7 @@ class DepartmentsController < ApplicationController
     end
 
     def index
+        # flash.notice = params[:date]
         @departments = Department.all
     end
 
@@ -31,8 +32,17 @@ class DepartmentsController < ApplicationController
         # end
     end
 
+    def change_day
+        day = params[:date]
+        
+    end
+
 
     private
+
+    def date_param
+        params[:date_param].blank?
+    end
     
     def department_params
         params.require(:department).permit(:title, :manager)
