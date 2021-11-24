@@ -47,7 +47,7 @@ ka_list = []
     (1).upto(29) do |j| 
         
         for ka_time in 0...3
-            if (ka_time == 3)
+            if (ka_time == 2)
                 ka = Shift.new(:date=>"#{j}-11-2021", :check_in=>"#{j}-11-2021 #{ka_time*8}:00 +7", :check_out=>"#{j+1}-11-2021 0:00 +7", :overtime=>ka_time)
             else
                 ka = Shift.new(:date=>"#{j}-11-2021", :check_in=>"#{j}-11-2021 #{ka_time*8}:00 +7", :check_out=>"#{j}-11-2021 #{ka_time*8+8}:00 +7", :overtime=>ka_time)
