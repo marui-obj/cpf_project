@@ -37,7 +37,8 @@ class ShiftsController < ApplicationController
                     if workactual.check_out.nil?
                         unless workactual.check_in.nil?
                             now = DateTime.now
-                            @shift_worktime = (now - workactual.check_in.localtime).abs/3600.0
+                            @shift_worktime = (now.to_time - workactual.check_in.to_time).abs/3600.0
+                            @temp_worktime += @shift_worktime
                         end
                     else same_date?(workactual, @shift)
                         @shift_worktime = (workactual.check_out. - workactual.check_in).abs/3600.0
@@ -130,6 +131,11 @@ class ShiftsController < ApplicationController
             employee = Employee.find(employee_id)
             new_work.employee = employee
             new_work.save
+
+            new_actual = Workactual.new(:date=>@shift.date)
+            new_actual.shift = @shift
+            new_actual.employee = employee
+            new_actual.save
         end
     end
 
@@ -138,6 +144,8 @@ class ShiftsController < ApplicationController
         employee_id = params["cur_employee_id_#{remove_key}".to_sym]
         employee = Employee.find(employee_id)
         work = @shift.workplans.find_by(:employee_id=>employee_id)
+        work.destroy
+        work = @shift.workactuals.find_by(:employee_id=>employee_id)
         work.destroy
     end
 

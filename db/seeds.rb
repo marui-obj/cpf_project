@@ -1,11 +1,4 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
-# Create Manager
+
 user1 = User.create!(:username=>"manager1", :password_digest=> BCrypt::Password.create("password"))
 boss1 = Manager.new(:name=>"Thanakorn Boriboon")
 boss1.user = user1
@@ -33,97 +26,69 @@ store = Department.new(:title=>"งานจัดเก็บและจ่า
 store.manager = boss2
 store.save
 
-#Create Employee
-user2 = User.create!(:username=>"employee1", :password_digest=>BCrypt::Password.create("password"))
-user2.save
-yee1 = Employee.new(:name=>"Thanadon Watcharawilairat")
-yee1.user = user2
-yee1.department = pluck
-yee1.save
+pluck_employee = ["Thanadon Watcharawilairat","Purin Petch-in","Phasit Sangklub"]
+kill_employee = ["Thatphum Paonim","Panat Raktukkun","Pakpoom Punpoon"]
+qc_employee = ["James Smith","David Johnson","Robert Williams","William Johnson"]
+store_employee = ["Michael Brown","James Jones","Robert Brown","Maria Martinez","Robert Miller"]
 
-user3 = User.create!(:username=>"employee2", :password_digest=>BCrypt::Password.create("password"))
-user3.save
-yee2 = Employee.new(:name=>"Purin Petch-in")
-yee2.user = user3
-yee2.department = pluck
-yee2.save
+employee_amount = pluck_employee.length() + kill_employee.length() + qc_employee.length() + store_employee.length()
 
-user4 = User.create!(:username=>"employee3", :password_digest=>BCrypt::Password.create("password"))
-user4.save
-yee3 = Employee.new(:name=>"Phasit Sangklub")
-yee3.user = user4
-yee3.department = pluck
-yee3.save
+department_list = { :work1 => [pluck,pluck_employee.length()],
+                    :work2 => [kill,pluck_employee.length() + kill_employee.length()],
+                    :work3 => [qc,pluck_employee.length() + kill_employee.length() + qc_employee.length()],
+                    :work4 => [store,employee_amount]}
 
-# Create Shift
-ka1 = Shift.new(:date=>"20-11-2021", :check_in=>"20-11-2021 0:00 +7", :check_out=>"20-11-2021 8:00 +7", :overtime=>1)
-ka1.department = pluck
-ka1.save
+yee_list = []
+ka_list = []
 
-ka2 = Shift.new(:date=>"20-11-2021", :check_in=>"20-11-2021 8:00 +7", :check_out=>"20-11-2021 16:00 +7", :overtime=>2)
-ka2.department = pluck
-ka2.save
 
-ka3 = Shift.new(:date=>"20-11-2021", :check_in=>"20-11-2021 16:00 +7", :check_out=>"21-11-2021 0:00 +7", :overtime=>3)
-ka3.department = pluck
-ka3.save
 
-wp1 = Workplan.new(:date=>ka1.date, :check_in=>ka1.check_in, :check_out=>ka1.check_out, :overtime=>0)
-wp1.shift = ka1
-wp1.employee = yee1
-wp1.save
+[:work1,:work2,:work3,:work4].each do |work|
+    (30).downto(25) do |j| 
+        
+        for ka_time in 0...3
+            if (ka_time == 3)
+                ka = Shift.new(:date=>"#{j}-11-2021", :check_in=>"#{j}-11-2021 #{ka_time*8}:00 +7", :check_out=>"#{j+1}-11-2021 0:00 +7", :overtime=>ka_time)
+            else
+                ka = Shift.new(:date=>"#{j}-11-2021", :check_in=>"#{j}-11-2021 #{ka_time*8}:00 +7", :check_out=>"#{j}-11-2021 #{ka_time*8+8}:00 +7", :overtime=>ka_time)
+            end
+            ka.department = department_list[work][0]
+            ka_list.append(ka)
+            ka.save
+        end
+        
+    end 
+    
+end
 
-wa1 = Workactual.new(:date=>ka1.date)
-wa1.shift = ka1
-wa1.employee = yee1
-wa1.save
+for i in 0...employee_amount
+    user = User.create!(:username=>"employee#{i+1}", :password_digest=>BCrypt::Password.create("password"))
+    user.save
+    
 
-wp2 = Workplan.new(:date=>ka2.date, :check_in=>ka2.check_in, :check_out=>ka2.check_out, :overtime=>2)
-wp2.shift = ka2
-wp2.employee = yee1
-wp2.save
+    if (i < department_list[:work1][1])
+        yee = Employee.new(:name=>pluck_employee[i])
+        yee.user = user
+        yee.department = department_list[:work1][0]
 
-wa2 = Workactual.new(:date=>ka2.date)
-wa2.shift = ka2
-wa2.employee = yee1
-wa2.save
+        
+    elsif(i < department_list[:work2][1])
+        yee = Employee.new(:name=>kill_employee[i - department_list[:work1][1]])
+        yee.user = user
+        yee.department = department_list[:work2][0]
+    
+    elsif(i < department_list[:work3][1])
+        yee = Employee.new(:name=>qc_employee[i - department_list[:work2][1]])
+        yee.user = user
+        yee.department = department_list[:work3][0]
+    
+    else
+        yee = Employee.new(:name=>store_employee[i - department_list[:work3][1]])
+        yee.user = user
+        yee.department = department_list[:work4][0]
+    end
 
-wp3 = Workplan.new(:date=>ka2.date, :check_in=>ka2.check_in, :check_out=>ka2.check_out, :overtime=>2)
-wp3.shift = ka2
-wp3.employee = yee2
-wp3.save
-
-wa3 = Workactual.new(:date=>ka2.date)
-wa3.shift = ka2
-wa3.employee = yee2
-wa3.save
-
-wp4 = Workplan.new(:date=>ka3.date, :check_in=>ka3.check_in, :check_out=>ka3.check_out, :overtime=>3)
-wp4.shift = ka3
-wp4.employee = yee1
-wp4.save
-
-wa4 = Workactual.new(:date=>ka3.date)
-wa4.shift = ka3
-wa4.employee = yee1
-wa4.save
-
-wp5 = Workplan.new(:date=>ka3.date, :check_in=>ka3.check_in, :check_out=>ka3.check_out, :overtime=>3)
-wp5.shift = ka3
-wp5.employee = yee2
-wp5.save
-
-wa5 = Workactual.new(:date=>ka3.date)
-wa5.shift = ka3
-wa5.employee = yee2
-wa5.save
-
-wp6 = Workplan.new(:date=>ka3.date, :check_in=>ka3.check_in, :check_out=>ka3.check_out, :overtime=>3)
-wp6.shift = ka3
-wp6.employee = yee3
-wp6.save
-
-wa6 = Workactual.new(:date=>ka3.date)
-wa6.shift = ka3
-wa6.employee = yee3
-wa6.save
+    yee_list.append(yee)
+    yee.save
+    
+end

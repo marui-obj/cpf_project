@@ -27,7 +27,6 @@ class DepartmentsController < ApplicationController
 
         # rescue
         #     redirect_to departments_path
-
         # end
     end
 

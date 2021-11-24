@@ -84,13 +84,13 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <% @employee_info.each_with_index do |employee, index| %>
+                            <% @employee_info.each do |employee| %>
                                 <tr>
                                     <%= text_field_tag "employee_id_#{employee[:id]}".to_sym, employee[:id], type: "hidden" %>
                                     <td><%= employee[:name] %></td>
                                     <td><%= employee[:status] %></td>
                                     <td><%= "%.2f" % employee[:worktime] %></td>
-                                    <td><%= submit_tag "Assign", name: "assign_#{index+1}", :class => 'button' %></td>
+                                    <td><%= submit_tag "Assign", name: "assign_#{employee[:id]}", :class => 'button' %></td>
                                 </tr>
                             <% end %>
                         </tbody>
