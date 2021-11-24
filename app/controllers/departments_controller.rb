@@ -2,18 +2,16 @@ class DepartmentsController < ApplicationController
     before_action :authorize
     before_action :can_enter?
     before_action :your_department?, only: [:show]
+    skip_before_action :verify_authenticity_token
+    
 
     def new
         @department = Department.new
     end
 
     def create
-        @department = Department.new(department_params)
-        if @department.save
-            continue
-        else
-            render :new
-        end
+        flash.notice = date_param;
+        redirect_to departments_path
     end
 
     def index
@@ -31,10 +29,12 @@ class DepartmentsController < ApplicationController
     end
 
 
+
+
     private
-    
-    def department_params
-        params.require(:department).permit(:title, :manager)
+
+    def date_param
+        params[:date]
     end
 
     def your_department?
@@ -44,5 +44,7 @@ class DepartmentsController < ApplicationController
             redirect_to departments_path
         end
     end
+    
+
     
 end
