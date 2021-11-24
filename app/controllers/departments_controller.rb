@@ -2,7 +2,7 @@ class DepartmentsController < ApplicationController
     before_action :authorize
     before_action :can_enter?
     before_action :your_department?, only: [:show]
-    skip_before_action :verify_authenticity_token
+    skip_before_action :verify_authenticity_"token
     @@date_value = Time.now.strftime("%d-%m-%Y")
 
     def new
@@ -10,8 +10,7 @@ class DepartmentsController < ApplicationController
     end
 
     def create
-        flash.notice = date_param;
-        @@date_value = date_param;
+        @@date_value = date_param unless date_param == ""
         redirect_to departments_path
     end
 

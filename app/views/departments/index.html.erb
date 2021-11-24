@@ -15,11 +15,10 @@
     <div class="container w-50">
         <div class="my-3 d-flex justify-content-center">
             <h1 class="text">Departments <span id='date'><%= @date_value %></span></h1>
-            <form action="/departments" method="post">
-                <input type="text" class="form-control" name="date">
-                <input type="submit" value="Submit">
-            </form>
             <h1 class="ml-3 align-self-center"><span id="datepicker"><i class="fa fa-calendar"></i></span></h1>
+            <form id="send-date" action="/departments" method="post">
+                <input type="hidden" class="form-control" name="date">
+            </form>
         </div>
         <div class="row">
             <% @departments.each_with_index do |department, index| %>

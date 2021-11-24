@@ -8,9 +8,9 @@ $(document).ready(function(){
     .on('changeDate', function(e) {
         var dateObject = $("#datepicker").datepicker("getDate");
         var dateString = dateObject.getDate() + '-' + (dateObject.getMonth() + 1) + '-' + dateObject.getFullYear();
-        // console.log(dateString);
-        $('input[name="date"]').val(dateString);
         
+        [$('input[name="date"]').val(dateString)]
+        document.getElementById("send-date").submit();
     });
 
 
