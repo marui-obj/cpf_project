@@ -2,7 +2,7 @@ class DepartmentsController < ApplicationController
     before_action :authorize
     before_action :can_enter?
     before_action :your_department?, only: [:show]
-    skip_before_action :verify_authenticity_"token
+    skip_before_action :verify_authenticity_token
     @@date_value = Time.now.strftime("%d-%m-%Y")
 
     def new
