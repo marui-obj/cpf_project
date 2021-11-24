@@ -44,7 +44,7 @@ ka_list = []
 
 
 [:work1,:work2,:work3,:work4].each do |work|
-    (30).downto(25) do |j| 
+    (1).upto(29) do |j| 
         
         for ka_time in 0...3
             if (ka_time == 3)
