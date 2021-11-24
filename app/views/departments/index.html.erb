@@ -15,6 +15,7 @@
     <div class="container w-50">
         <div class="my-3 d-flex justify-content-center">
             <h1 class="text">Departments <span id='date'></span></h1>
+            
             <h1 class="ml-3 align-self-center"><span id="datepicker"><i class="fa fa-calendar"></i></span></h1>
         </div>
         <div class="row">
@@ -25,7 +26,7 @@
                             <h5 class="card-title"><%= department.title %></h5>
                             <p class="card-text">Manager: <%= department.manager.name %><br>
                                 Employee Amount: <%= department.employees.size %><br>
-                                Shift Amount: <%= department.shifts.size %>
+                                Shift Amount: <%= department.shifts.day_filter(Date.parse("25-11-2021")).size %>
                             </p>
                             <%= link_to '<button>details</button>'.html_safe,  department_path(department.id)%>
                         </div>

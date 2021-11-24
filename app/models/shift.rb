@@ -4,4 +4,6 @@ class Shift < ActiveRecord::Base
     has_many :employees, :through => :workplans
     has_many :workactuals
     has_many :employees, :through => :workactuals
+
+    scope :day_filter, -> (date) {where date: date}
 end
